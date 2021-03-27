@@ -10,7 +10,7 @@ nav{
 nav a{
     text-decoration: none;
     line-height: 40px;
-    margin-left: 30px;
+    margin-left: 50px;
 }
 
 .nav-title{
@@ -32,3 +32,29 @@ nav a{
 .nav-tab:hover{
     color: rgba(255, 255, 255, 0.833);
 }
+
+.nav-search{
+    margin-right: 50px;
+    margin-left: auto;
+    margin-top: 6px;
+    border: none; 
+    border-bottom: 1px solid white;
+    outline: none;
+    background-color: #010C20;
+    height: 30px;
+    font-size: 18px;
+    color: #646F81;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #646F81;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #646F81;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #646F81;
+  }
