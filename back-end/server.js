@@ -1,6 +1,13 @@
 const express = require('express');
 const app = express();
 
+// routes
+var search = require('./routes/search.js');
+
+// add api
+app.use('/search', search);
+
+
 app.get('/', (req, res) => {
   res.send('Hello from App Engine!');
 });

@@ -1,0 +1,23 @@
+<nav>
+    <a class="nav-title" routerLink="/">USC Films</a>
+    <div ngbNav #nav="ngbNav" [(activeId)]="activePage">
+        <span [ngbNavItem]="1">
+            <a ngbNavLink class="nav-tab" routerLink="/">Home</a>
+        </span>
+        <span [ngbNavItem]="2">
+             <a ngbNavLink class="nav-tab" routerLink="/mylist">My List</a>
+        </span>
+    </div>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+    <!-- <input id="typeahead-template" type="text" 
+        class="form-control" 
+        [(ngModel)]="model" 
+        [ngbTypeahead]="search" 
+        [resultTemplate]="rt"
+    />
+    <ng-template #rt let-r="result" let-t="term">
+        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">
+        <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+    </ng-template> -->
+</nav>
