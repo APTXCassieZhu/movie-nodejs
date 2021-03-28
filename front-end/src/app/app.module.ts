@@ -11,6 +11,7 @@ import { MylistpageComponent } from './components/mylistpage/mylistpage.componen
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChildIdComponent } from './components/child-id/child-id.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

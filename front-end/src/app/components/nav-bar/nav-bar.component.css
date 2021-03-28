@@ -43,18 +43,28 @@ nav a{
     background-color: #010C20;
     height: 30px;
     font-size: 18px;
-    color: #646F81;
+    color: white;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #646F81;
     opacity: 1; /* Firefox */
-  }
-  
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #646F81;
-  }
-  
-  ::-ms-input-placeholder { /* Microsoft Edge */
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
     color: #646F81;
-  }
+}
+
+.search-img{
+    height: 40px;
+    margin-right: 10px;
+}
+
+.dropdown-menu.show{
+    background-color: #050A30;
+    border-color: white;
+}
