@@ -17,8 +17,10 @@
         [inputFormatter]="formatter"
     />
     <ng-template #rt let-r="result" let-t="term" class="result-list">
-        <img [src]="r['backdrop_path']" class="search-img">
-        <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        <div (click)="viewSearchResultDetail($event, r['media_type'], r['id'])">
+            <img [src]="r['backdrop_path']" class="search-img">
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </div>
     </ng-template>
     
 </nav>

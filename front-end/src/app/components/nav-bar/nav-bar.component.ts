@@ -3,6 +3,7 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, catchError  } from 'rxjs/operators';
 import { SearchService } from "../../services/search.service"
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 export interface Media{
   id: number;
@@ -20,7 +21,8 @@ export class NavBarComponent implements OnInit {
   public query: string = '';
   public activePage = "1";
   public searchResult: Media[] = [];
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, 
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +42,10 @@ export class NavBarComponent implements OnInit {
     })
     console.log(this.searchResult);
     return this.searchResult;
+  }
+
+  viewSearchResultDetail(event: any, media_type: string, id: number){
+    this.router.navigateByUrl('/watch/'+media_type+'/'+id);
   }
 }
 

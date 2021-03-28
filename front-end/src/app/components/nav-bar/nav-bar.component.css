@@ -64,7 +64,11 @@ nav a{
     margin-right: 10px;
 }
 
-.dropdown-menu.show{
+::ng-deep .dropdown-menu{
     background-color: #050A30;
-    border-color: white;
+    border-color: white;  
+    margin-top: 1px;
+}
+::ng-deep .dropdown-item{
+    color: white;
 }
