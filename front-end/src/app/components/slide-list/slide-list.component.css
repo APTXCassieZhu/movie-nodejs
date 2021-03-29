@@ -1,6 +1,10 @@
-.title{
+.slide-title{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 2%;
     margin-left: 5%;
+}
+
+.slide-image-container img{
+    width: 15%;
 }
