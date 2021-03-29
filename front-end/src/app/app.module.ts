@@ -12,6 +12,7 @@ import { TvpageComponent } from './components/tvpage/tvpage.component';
 import { MylistpageComponent } from './components/mylistpage/mylistpage.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChildIdComponent } from './components/child-id/child-id.component';
+import { SlideListComponent } from './components/slide-list/slide-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ChildIdComponent } from './components/child-id/child-id.component';
     TvpageComponent,
     MylistpageComponent,
     NavBarComponent,
-    ChildIdComponent
+    ChildIdComponent,
+    SlideListComponent
   ],
   imports: [
     NgbModule,

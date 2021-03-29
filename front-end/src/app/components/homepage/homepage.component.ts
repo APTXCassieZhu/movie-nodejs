@@ -17,6 +17,14 @@ export interface slide{
 })
 export class HomepageComponent implements OnInit {
   public now_play: slide[] = [];
+  public title1: string = 'Continue Watching';
+  public title2: string = 'Popular Movies';
+  public title3: string = 'Top Rated Movies';
+  public title4: string = 'Trending Movies';
+  public title5: string = 'Popular TV Shows';
+  public title6: string = 'Top Rated TV Shows';
+  public title7: string = 'Trending TV Shows';
+  
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;

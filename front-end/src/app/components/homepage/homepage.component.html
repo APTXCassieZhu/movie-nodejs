@@ -1,12 +1,22 @@
-<ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
-  <ng-template ngbSlide *ngFor="let img_info of now_play; index as i">
-    <a href="/watch/movie/{{img_info['id']}}" rel="nofollow noopener noreferrer">
-      <div class="picsum-img-wrapper">
-        <img [src]="img_info['backdrop_path']">
-        <div class="mask">
-          <p class="poster-title">{{img_info['title']}}</p>
+<div class="carousel-container">
+  <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+    <ng-template ngbSlide *ngFor="let img_info of now_play; index as i">
+      <a href="/watch/movie/{{img_info['id']}}" rel="nofollow noopener noreferrer">
+        <div class="picsum-img-wrapper">
+          <img [src]="img_info['backdrop_path']">
+          <div class="mask">
+            <p class="poster-title">{{img_info['title']}}</p>
+          </div>
         </div>
-      </div>
-    </a>
-  </ng-template>
-</ngb-carousel>
+      </a>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+<app-slide-list [componentTitle]="title1"></app-slide-list>
+<app-slide-list [componentTitle]="title2"></app-slide-list>
+<app-slide-list [componentTitle]="title3"></app-slide-list>
+<app-slide-list [componentTitle]="title4"></app-slide-list>
+<app-slide-list [componentTitle]="title5"></app-slide-list>
+<app-slide-list [componentTitle]="title6"></app-slide-list>
+<app-slide-list [componentTitle]="title7"></app-slide-list>
