@@ -16,7 +16,11 @@ body, input[type="text"], button {
   color: #333;
   font-family: Cambria, Georgia, serif;
 }
+.center-container{
+  text-align: center;
+}
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #050A30;
 }
