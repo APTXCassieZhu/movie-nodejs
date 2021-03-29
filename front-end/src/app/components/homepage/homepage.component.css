@@ -8,6 +8,7 @@
     max-width: 1200px;
     max-height: 500px;
     margin: auto;
+    overflow: hidden;
 }
 
 .picsum-img-wrapper img{
@@ -21,12 +22,14 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.021),rgba(255, 255, 255, 0.1), black, black);
+    background-image: linear-gradient(to bottom, rgba(7, 7, 7, 0.1),rgba(7, 7, 7, 0.1), rgba(7, 7, 7, 0.1), black, black);
     overflow: hidden;
     width: 100%;
+    max-width: 1200px;
     height: 100%;
     opacity: 0;
     transition: .2s ease;
+    margin: auto;
 }
 
 .picsum-img-wrapper:hover .mask{
@@ -47,6 +50,9 @@
     text-align: center;
 }
 
+::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next{
+    width: 12%;
+}
 /* fix */
 ::ng-deep .carousel-indicators li {
     box-sizing: content-box;
