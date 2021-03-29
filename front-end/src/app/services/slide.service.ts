@@ -12,4 +12,28 @@ export class SlideService {
     let url = "http://localhost:8080/slide/now_playing";
     return this.httpClient.get(url);
   }
+  getPopularMovies(){
+    let url = "http://localhost:8080/slide/popular/movie";
+    return this.httpClient.get(url);
+  }
+  getTopratedMovies(){
+    let url = "http://localhost:8080/slide/toprated/movie";
+    return this.httpClient.get(url);
+  }
+  getTrendingMovies(){
+    let url = "http://localhost:8080/slide/trending/movie";
+    return this.httpClient.get(url);
+  }
+  getPopularTV(){
+    let url = "http://localhost:8080/slide/popular/tv";
+    return this.httpClient.get(url);
+  }
+  getTopratedTV(){
+    let url = "http://localhost:8080/slide/toprated/tv";
+    return this.httpClient.get(url);
+  }
+  getTrendingTV(){
+    let url = "http://localhost:8080/slide/trending/tv";
+    return this.httpClient.get(url);
+  }
 }

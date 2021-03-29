@@ -5,6 +5,13 @@
     margin-left: 5%;
 }
 
+.slide-image-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
 .slide-image-container img{
     width: 15%;
+    
 }

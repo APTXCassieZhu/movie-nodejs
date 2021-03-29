@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { smallSlide } from '../homepage/homepage.component';
+
 
 @Component({
   selector: 'app-slide-list',
@@ -7,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SlideListComponent implements OnInit {
   @Input() componentTitle: string = 'Default Title';
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  @Input() slides: smallSlide[][] = [];
   constructor() { }
 
   ngOnInit(): void {

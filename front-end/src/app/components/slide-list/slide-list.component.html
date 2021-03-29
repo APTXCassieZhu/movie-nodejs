@@ -1,8 +1,10 @@
 <h1 class="slide-title">{{componentTitle}}</h1>
-<ngb-carousel *ngIf="images">
-  <ng-template ngbSlide *ngFor="let image of images">
-    <div class="slide-image-container">
-        <img [src]="image" alt="Random slide">
+<ngb-carousel *ngIf="slides">
+  <ng-template ngbSlide *ngFor="let group of slides" >
+    <div class="slide-image-wrapper">
+      <div class="slide-image-container" *ngFor="let image of group">
+        <img [src]="image['poster_path']">
+      </div>
     </div>
   </ng-template>
 </ngb-carousel>

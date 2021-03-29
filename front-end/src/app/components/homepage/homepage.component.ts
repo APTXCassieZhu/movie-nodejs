@@ -10,6 +10,12 @@ export interface slide{
   backdrop_path: string;
 }
 
+export interface smallSlide{
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -17,6 +23,13 @@ export interface slide{
 })
 export class HomepageComponent implements OnInit {
   public now_play: slide[] = [];
+  public continue_watch: smallSlide[][] = [];
+  public popular_movies: smallSlide[][] = [];
+  public toprated_movies: smallSlide[][] = [];
+  public trending_movies: smallSlide[][] = [];
+  public popular_tv: smallSlide[][] = [];
+  public toprated_tv: smallSlide[][] = [];
+  public trending_tv: smallSlide[][] = [];
   public title1: string = 'Continue Watching';
   public title2: string = 'Popular Movies';
   public title3: string = 'Top Rated Movies';
@@ -24,19 +37,35 @@ export class HomepageComponent implements OnInit {
   public title5: string = 'Popular TV Shows';
   public title6: string = 'Top Rated TV Shows';
   public title7: string = 'Trending TV Shows';
-  
+  tempFormatted : any[] = [];
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;
   pauseOnHover = true;
   pauseOnFocus = true;
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
   constructor(private slideService: SlideService) { }
 
   ngOnInit(): void {
     this.slideService.getNowPlaying().subscribe(res => {
       this.now_play = Object.values(res)[0];
-      console.log(this.now_play);
+    })
+    this.slideService.getPopularMovies().subscribe(res => {
+      this.popular_movies = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getTopratedMovies().subscribe(res => {
+      this.toprated_movies = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getTrendingMovies().subscribe(res => {
+      this.trending_movies = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getPopularTV().subscribe(res => {
+      this.popular_tv = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getTopratedTV().subscribe(res => {
+      this.toprated_tv = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getTrendingTV().subscribe(res => {
+      this.trending_tv = this.format(Object.values(res)[0]);
     })
   }
 
@@ -57,6 +86,23 @@ export class HomepageComponent implements OnInit {
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
+  }
+
+  format(slides: smallSlide[]){
+    this.tempFormatted = [];
+    var j = -1;
+
+    for (var i = 0; i < slides.length; i++) {
+        if (i % 3 == 0) {
+            j++;
+            this.tempFormatted[j] = [];
+            this.tempFormatted[j].push(slides[i]);
+        }
+        else {
+            this.tempFormatted[j].push(slides[i]);
+        }
+    }
+    return this.tempFormatted;
   }
 
 }
