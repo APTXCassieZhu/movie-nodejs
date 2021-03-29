@@ -1,5 +1,7 @@
 .carousel-container{
     max-height: 500px;
+    max-width: 1300px;
+    margin: auto;
 }
 
 ::ng-deep .carousel{
@@ -54,7 +56,7 @@
 }
 
 ::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next{
-    width: 12%;
+    width: 5%;
 }
 /* fix */
 ::ng-deep .carousel-indicators li {
