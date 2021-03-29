@@ -50,4 +50,5 @@ export class HomepageComponent implements OnInit {
       this.togglePaused();
     }
   }
+
 }

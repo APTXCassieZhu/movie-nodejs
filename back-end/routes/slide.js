@@ -17,7 +17,7 @@ router.get('/now_playing', function(req, res){
                 + '"id":' + data.data.results[i].id + ','
                 + '"title":"' + data.data.results[i].title + '",';
             if(data.data.results[i].poster_path){
-                result += '"backdrop_path":"https://image.tmdb.org/t/p/w780' + data.data.results[i].backdrop_path + '"';
+                result += '"backdrop_path":"https://image.tmdb.org/t/p/original' + data.data.results[i].backdrop_path + '"';
             }else{
                 result += '"backdrop_path":"https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/movie-placeholder.jpg"';
             }

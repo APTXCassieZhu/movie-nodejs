@@ -1,15 +1,12 @@
 <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
   <ng-template ngbSlide *ngFor="let img_info of now_play; index as i">
-    <div class="carousel-caption">
-      <h3>{{img_info['title']}}</h3>
-    </div>
-    <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
+    <a href="/watch/movie/{{img_info['id']}}" rel="nofollow noopener noreferrer">
       <div class="picsum-img-wrapper">
         <img [src]="img_info['backdrop_path']">
+        <div class="mask">
+          <p class="poster-title">{{img_info['title']}}</p>
+        </div>
       </div>
     </a>
   </ng-template>
 </ngb-carousel>
-
-
-
