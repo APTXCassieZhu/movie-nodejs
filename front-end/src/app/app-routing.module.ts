@@ -9,17 +9,10 @@ import { ChildIdComponent } from './components/child-id/child-id.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {
-    path: 'watch/movie', 
+    path: 'watch', 
     children: [
       {path: '', component: MoviepageComponent},
-      {path: ':id', component: ChildIdComponent},
-    ]
-  },
-  {
-    path: 'watch/tv', 
-    children: [
-      {path: '', component: TvpageComponent},
-      {path: ':id', component: ChildIdComponent},
+      {path: ':media_type/:id', component: ChildIdComponent},
     ]
   },
   {path: 'mylist', component: MylistpageComponent}
