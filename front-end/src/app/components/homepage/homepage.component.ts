@@ -93,7 +93,7 @@ export class HomepageComponent implements OnInit {
     var j = -1;
 
     for (var i = 0; i < slides.length; i++) {
-        if (i % 3 == 0) {
+        if (i % 6 == 0) {
             j++;
             this.tempFormatted[j] = [];
             this.tempFormatted[j].push(slides[i]);

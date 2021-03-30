@@ -3,7 +3,14 @@
   <ng-template ngbSlide *ngFor="let group of slides" >
     <div class="slide-image-wrapper">
       <div class="slide-image-container" *ngFor="let image of group">
-        <img [src]="image['poster_path']">
+        <a href="/watch/movie/{{image['id']}}">
+            <div class="slide-image">
+                <img [src]="image['poster_path']">
+                <div class="mask">
+                    <p class="poster-title">{{image['title']}}</p>
+                </div>
+            </div>
+        </a>
       </div>
     </div>
   </ng-template>

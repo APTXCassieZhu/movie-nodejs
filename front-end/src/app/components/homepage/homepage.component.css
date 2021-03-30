@@ -1,17 +1,15 @@
 .carousel-container{
     max-height: 500px;
-    max-width: 1300px;
+    max-width: 1250px;
     margin: auto;
 }
 
 ::ng-deep .carousel{
-    width: 70%;
-    height: 80%;
     margin: auto;
 }
 
 .picsum-img-wrapper{
-    max-width: 950px;
+    max-width: 1250px;
     max-height: 420px;
     margin: auto;
 }
