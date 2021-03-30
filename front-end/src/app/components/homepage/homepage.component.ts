@@ -38,6 +38,13 @@ export class HomepageComponent implements OnInit {
   public title5: string = 'Popular TV Shows';
   public title6: string = 'Top Rated TV Shows';
   public title7: string = 'Trending TV Shows';
+  public sum1: number = 0;
+  public sum2: number = 0;
+  public sum3: number = 0;
+  public sum4: number = 0;
+  public sum5: number = 0;
+  public sum6: number = 0;
+  public sum7: number = 0;
   tempFormatted : any[] = [];
   paused = false;
   unpauseOnArrow = false;
@@ -51,21 +58,27 @@ export class HomepageComponent implements OnInit {
       this.now_play = Object.values(res)[0];
     })
     this.slideService.getPopularMovies().subscribe(res => {
+      this.sum2 = Object.values(res)[0].length;
       this.popular_movies = this.format(Object.values(res)[0]);
     })
     this.slideService.getTopratedMovies().subscribe(res => {
+      this.sum3 = Object.values(res)[0].length;
       this.toprated_movies = this.format(Object.values(res)[0]);
     })
     this.slideService.getTrendingMovies().subscribe(res => {
+      this.sum4 = Object.values(res)[0].length;
       this.trending_movies = this.format(Object.values(res)[0]);
     })
     this.slideService.getPopularTV().subscribe(res => {
+      this.sum5 = Object.values(res)[0].length;
       this.popular_tv = this.format(Object.values(res)[0]);
     })
     this.slideService.getTopratedTV().subscribe(res => {
+      this.sum6 = Object.values(res)[0].length;
       this.toprated_tv = this.format(Object.values(res)[0]);
     })
     this.slideService.getTrendingTV().subscribe(res => {
+      this.sum7 = Object.values(res)[0].length;
       this.trending_tv = this.format(Object.values(res)[0]);
     })
   }

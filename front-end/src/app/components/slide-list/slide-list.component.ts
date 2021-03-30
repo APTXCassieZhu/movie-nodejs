@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { smallSlide } from '../homepage/homepage.component';
 
@@ -11,6 +11,8 @@ import { smallSlide } from '../homepage/homepage.component';
 export class SlideListComponent implements OnInit {
   @Input() componentTitle: string = 'Default Title';
   @Input() slides: smallSlide[][] = [];
+  @Input() slideSum: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
