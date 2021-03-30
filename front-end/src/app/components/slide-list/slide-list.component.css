@@ -17,15 +17,15 @@
 
 .slide-image{
     position: relative;
-    max-width: 180px;
+    max-width: 220px;
     max-height: 270px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .slide-image img{
     width: 100%;
-    max-width: 180px;
+    max-width: 220px;
     max-height: 270px;
 }
 

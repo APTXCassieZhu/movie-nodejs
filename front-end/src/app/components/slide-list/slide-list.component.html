@@ -3,7 +3,7 @@
   <ng-template ngbSlide *ngFor="let group of slides" >
     <div class="slide-image-wrapper">
       <div class="slide-image-container" *ngFor="let image of group">
-        <a href="/watch/movie/{{image['id']}}">
+        <a href="/watch/{{image['media_type']}}/{{image['id']}}">
             <div class="slide-image">
                 <img [src]="image['poster_path']">
                 <div class="mask">

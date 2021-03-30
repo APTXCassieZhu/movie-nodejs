@@ -13,7 +13,8 @@ router.get('/now_playing', function(req, res){
         for(var i = 0; i < 5; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].title + '",';
+                + '"title":"' + data.data.results[i].title + '",'
+                + '"media_type":"movie",';
             if(data.data.results[i].poster_path){
                 result += '"backdrop_path":"https://image.tmdb.org/t/p/original' + data.data.results[i].backdrop_path + '"';
             }else{
@@ -42,7 +43,8 @@ router.get('/popular/movie', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].title + '",';
+                + '"title":"' + data.data.results[i].title + '",'
+                + '"media_type":"movie",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
@@ -71,7 +73,8 @@ router.get('/toprated/movie', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].title + '",';
+                + '"title":"' + data.data.results[i].title + '",'
+                + '"media_type":"movie",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
@@ -100,7 +103,8 @@ router.get('/trending/movie', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].title + '",';
+                + '"title":"' + data.data.results[i].title + '",'
+                + '"media_type":"movie",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
@@ -129,7 +133,8 @@ router.get('/popular/tv', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].name + '",';
+                + '"title":"' + data.data.results[i].name + '",'
+                + '"media_type":"tv",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
@@ -158,7 +163,8 @@ router.get('/toprated/tv', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].name + '",';
+                + '"title":"' + data.data.results[i].name + '",'
+                + '"media_type":"tv",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
@@ -187,7 +193,8 @@ router.get('/trending/tv', function(req, res){
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
-                + '"title":"' + data.data.results[i].name + '",';
+                + '"title":"' + data.data.results[i].name + '",'
+                + '"media_type":"tv",';
             if(data.data.results[i].poster_path){
                 result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
             }else{
