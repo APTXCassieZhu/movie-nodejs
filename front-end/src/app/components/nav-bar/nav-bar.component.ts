@@ -40,7 +40,6 @@ export class NavBarComponent implements OnInit {
     this.searchService.get7Matches(query).subscribe(res => {
       this.searchResult = Object.values(res)[0];
     })
-    console.log(this.searchResult);
     return this.searchResult;
   }
 
