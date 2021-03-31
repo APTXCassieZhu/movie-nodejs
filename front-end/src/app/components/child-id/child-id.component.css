@@ -68,3 +68,7 @@
     width: fit-content;
     margin-top: 15px;
 }
+
+.video-des-container ngb-alert{
+    margin-top: 15px;
+}

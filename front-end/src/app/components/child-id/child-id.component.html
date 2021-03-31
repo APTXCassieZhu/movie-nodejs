@@ -15,9 +15,11 @@
         <div class="des-number-style">{{cur_media.release_date.substring(0,4)}} | &#9733; {{cur_media.vote_average}} | {{duration}}</div>
         <div class="des-list">Genres : <span *ngFor="let genre of cur_media.genres">{{genre}}</span></div>
         <div class="des-list">Spoken Languages : <span *ngFor="let language of cur_media.spoken_languages">{{language}}</span></div>
-        <button type="button" class="btn btn-primary add-btn" (click)="addToWatchList()">Add to Watchlist</button>
-
+        <button *ngIf="!added" type="button" class="btn btn-primary add-btn" (click)="addToWatchList($event)">Add to Watchlist</button>
+        <button *ngIf="added" type="button" class="btn btn-primary add-btn" (click)="removeFromWatchList($event)">Remove from Watchlist</button>
+        <ngb-alert #selfClosingAlert *ngIf="showAlert" [type]="alert.type" (closed)="showAlert = ''">{{ alert.message }}</ngb-alert>
     </div>
 </div>
+
 <h5>Description</h5>
 <p>{{cur_media.overview}}</p>
