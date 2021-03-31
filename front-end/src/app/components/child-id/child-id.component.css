@@ -11,7 +11,6 @@
     width: 60%;
     overflow: hidden;
 }
-
 .video-container {
     float: none;
     clear: both;
@@ -35,4 +34,37 @@
     flex-direction: column;
     color: white;
     margin-left: 3%;
+}
+
+.tagline-style{
+    font-style: italic;
+    font-family: Comic Sans MS;
+    font-weight: lighter;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #D3D1DE;
+}
+
+.des-number-style{
+    color: #D3D1DE;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.des-list{
+    color: white;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.des-list span{
+    color: #9FA5C2;
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.add-btn{
+    width: fit-content;
+    margin-top: 15px;
 }

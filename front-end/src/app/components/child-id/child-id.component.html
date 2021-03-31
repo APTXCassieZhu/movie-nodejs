@@ -10,9 +10,14 @@
         </div>
     </div>
     <div class="video-des-container">
-        <h1></h1>
-        {{id}}
-{{media_type}} 
+        <h1>{{cur_media.title}}</h1>
+        <div class="tagline-style">{{cur_media.tagline}}</div>
+        <div class="des-number-style">{{cur_media.release_date.substring(0,4)}} | &#9733; {{cur_media.vote_average}} | {{duration}}</div>
+        <div class="des-list">Genres : <span *ngFor="let genre of cur_media.genres">{{genre}}</span></div>
+        <div class="des-list">Spoken Languages : <span *ngFor="let language of cur_media.spoken_languages">{{language}}</span></div>
+        <button type="button" class="btn btn-primary add-btn" (click)="addToWatchList()">Add to Watchlist</button>
 
     </div>
 </div>
+<h5>Description</h5>
+<p>{{cur_media.overview}}</p>

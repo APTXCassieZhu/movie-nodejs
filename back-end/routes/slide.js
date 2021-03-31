@@ -40,6 +40,7 @@ router.get('/popular/movie', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
@@ -70,6 +71,7 @@ router.get('/toprated/movie', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
@@ -100,6 +102,7 @@ router.get('/trending/movie', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
@@ -130,6 +133,7 @@ router.get('/popular/tv', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
@@ -160,6 +164,7 @@ router.get('/toprated/tv', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
@@ -190,6 +195,7 @@ router.get('/trending/tv', function(req, res){
     axios.get(url).then(data => {
         var result = '{"results":['  
         var len = data.data.results.length;
+        len = Math.min(len, 24);
         for(var i = 0; i < len; i++){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','

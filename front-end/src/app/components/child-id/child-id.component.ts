@@ -4,16 +4,17 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { DetailsService } from "../../services/details.service"
 
 let apiLoaded = false;
-export interface movie{
+export interface media{
   "title": string,
   "release_date": string,
-  "runtime": number,
+  "runtime": number[],
   "overview": string,
   "vote_average": number,
   "tagline": string,
   "genres": string[],
   "spoken_languages": string[]
 }
+
 @Component({
   selector: 'app-child-id',
   templateUrl: './child-id.component.html',
@@ -22,7 +23,8 @@ export interface movie{
 export class ChildIdComponent implements OnInit {
   public id : any;
   public media_type: any;
-  public cur_movie: any;
+  public cur_media: media = {} as media;
+  public duration: string = '';
   constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }
 
   ngOnInit(): void {
@@ -37,9 +39,13 @@ export class ChildIdComponent implements OnInit {
       apiLoaded = true;
     }
     this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
-      this.cur_movie = Object.values(res)[0];
-      console.log(this.cur_movie);
+      this.cur_media = res;
+      var hours = Math.floor(this.cur_media.runtime[0] / 60);
+      var minutes = this.cur_media.runtime[0] % 60;
+      this.duration = hours + 'hrs ' + minutes + 'mins';
     })
   }
-
+  addToWatchList(){
+    
+  }
 }

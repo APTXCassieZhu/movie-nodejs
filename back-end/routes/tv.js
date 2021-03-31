@@ -45,7 +45,7 @@ router.get('/:id', function(req, res){
     axios.get(url).then(data => {
         var result = '{'  
         result += '"title":"' + data.data.name + '",'
-            + '"first_air_date": "' + data.data.first_air_date + '",'
+            + '"release_date": "' + data.data.first_air_date + '",'
             + '"overview": "' + data.data.overview + '",'
             + '"vote_average": "' + data.data.vote_average + '",'
             + '"tagline": "' + data.data.tagline + '",'
@@ -55,7 +55,7 @@ router.get('/:id', function(req, res){
             if(i == len - 1){
                 result += '"' + data.data.genres[i].name + '"';
             }else{
-                result += '"' + data.data.genres[i].name + '",';
+                result += '"' + data.data.genres[i].name + ',",';
             }
         }
         result += '],'
@@ -65,20 +65,20 @@ router.get('/:id', function(req, res){
             if(i == len - 1){
                 result += '"' + data.data.spoken_languages[i].name + '"';
             }else{
-                result += '"' + data.data.spoken_languages[i].name + '",';
+                result += '"' + data.data.spoken_languages[i].name + ',",';
             }
         }
         result += '],'
-            + '"episode_run_time": [';
+            + '"runtime": [';
         len = data.data.episode_run_time.length;
         for(var i = 0; i < len; i++){
             if(i == len - 1){
-                result += '"' + data.data.episode_run_time[i] + '"';
+                result += '' + data.data.episode_run_time[i] + '';
             }else{
-                result += '"' + data.data.episode_run_time[i] + '",';
+                result += '' + data.data.episode_run_time[i] + ',';
             }
         }
-        result += ']}';
+        result += ']}';        
         res.json(JSON.parse(result));
     }).catch(err => {
         res.send(err);

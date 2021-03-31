@@ -46,7 +46,7 @@ router.get('/:id', function(req, res){
         var result = '{'  
         result += '"title":"' + data.data.title + '",'
             + '"release_date": "' + data.data.release_date + '",'
-            + '"runtime": "' + data.data.runtime + '",'
+            + '"runtime": [' + data.data.runtime + '],'
             + '"overview": "' + data.data.overview + '",'
             + '"vote_average": "' + data.data.vote_average + '",'
             + '"tagline": "' + data.data.tagline + '",'
@@ -56,7 +56,7 @@ router.get('/:id', function(req, res){
             if(i == len - 1){
                 result += '"' + data.data.genres[i].name + '"';
             }else{
-                result += '"' + data.data.genres[i].name + '",';
+                result += '"' + data.data.genres[i].name + ',",';
             }
         }
         result += '],'
@@ -66,7 +66,7 @@ router.get('/:id', function(req, res){
             if(i == len - 1){
                 result += '"' + data.data.spoken_languages[i].name + '"';
             }else{
-                result += '"' + data.data.spoken_languages[i].name + '",';
+                result += '"' + data.data.spoken_languages[i].name + ',",';
             }
         }
         result += ']}';
