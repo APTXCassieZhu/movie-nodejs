@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './components/homepage/homepage.component'
-import { MoviepageComponent } from './components/moviepage/moviepage.component'
-import { TvpageComponent } from './components/tvpage/tvpage.component'
 import { MylistpageComponent } from './components/mylistpage/mylistpage.component'
 import { ChildIdComponent } from './components/child-id/child-id.component';
 
@@ -11,7 +9,6 @@ const routes: Routes = [
   {
     path: 'watch', 
     children: [
-      {path: '', component: MoviepageComponent},
       {path: ':media_type/:id', component: ChildIdComponent},
     ]
   },

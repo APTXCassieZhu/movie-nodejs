@@ -57,6 +57,10 @@ export class HomepageComponent implements OnInit {
     this.slideService.getNowPlaying().subscribe(res => {
       this.now_play = Object.values(res)[0];
     })
+    var continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
+    this.continue_watch = this.format(continue_list);
+    this.sum1 = this.continue_watch.length;
+
     this.slideService.getPopularMovies().subscribe(res => {
       this.sum2 = Object.values(res)[0].length;
       this.popular_movies = this.format(Object.values(res)[0]);

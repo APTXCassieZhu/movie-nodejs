@@ -9,24 +9,26 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { MoviepageComponent } from './components/moviepage/moviepage.component';
-import { TvpageComponent } from './components/tvpage/tvpage.component';
 import { MylistpageComponent } from './components/mylistpage/mylistpage.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChildIdComponent } from './components/child-id/child-id.component';
 import { SlideListComponent } from './components/slide-list/slide-list.component';
+import { YoutubeComponent } from './components/youtube/youtube.component';
+import { CastComponent } from './components/cast/cast.component';
+import { ReviewComponent } from './components/review/review.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    MoviepageComponent,
-    TvpageComponent,
     MylistpageComponent,
     NavBarComponent,
     ChildIdComponent,
-    SlideListComponent
+    SlideListComponent,
+    YoutubeComponent,
+    CastComponent,
+    ReviewComponent
   ],
   imports: [
     NgbModule,

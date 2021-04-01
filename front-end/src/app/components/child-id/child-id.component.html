@@ -1,11 +1,8 @@
 <div class="detail-wrapper">
     <div class="video-wrapper">
         <div class="video-container">
-            <youtube-player
-            videoId="sfM7_JLk-84"
-            suggestedQuality="highres"
-            >
-            </youtube-player>
+        <!-- <app-youtube [videoId]="video.key"></app-youtube> -->
+        <app-youtube [mediaId]="id" [mediaType]="media_type"></app-youtube>
         </div>
     </div>
     <div class="video-des-container">

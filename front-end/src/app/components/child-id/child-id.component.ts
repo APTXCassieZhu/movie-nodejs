@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { YouTubePlayerModule } from '@angular/youtube-player';
 import { faFacebookSquare, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 import { DetailsService } from "../../services/details.service"
@@ -10,7 +9,6 @@ import { debounceTime } from 'rxjs/operators';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { smallSlide } from '../homepage/homepage.component';
 
-let apiLoaded = false;
 export interface media{
   "title": string,
   "release_date": string,
@@ -52,6 +50,7 @@ export class ChildIdComponent implements OnInit {
   private _success = new Subject<string>();
   facebook = faFacebookSquare;
   twitter = faTwitter;
+  public continue_list: smallSlide[] = [];
   constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }
   
   @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert = {} as NgbAlert; 
@@ -59,15 +58,8 @@ export class ChildIdComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.media_type = this.route.snapshot.paramMap.get('media_type');
-    if (!apiLoaded) {
-      // This code loads the IFrame Player API code asynchronously, according to the instructions at
-      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-      apiLoaded = true;
-    }
-    this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
+
+    this.detailsService.getDetails(this.id, this.media_type).subscribe(res => {
       this.cur_media = res;
       this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
       var hours = Math.floor(this.cur_media.runtime[0] / 60);
@@ -75,23 +67,25 @@ export class ChildIdComponent implements OnInit {
       this.duration = hours + 'hrs ' + minutes + 'mins';
       
       // for local storage
-      var continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
-      console.log(continue_list);
+      this.continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
+      console.log(this.continue_list);
       console.log(this.cur_media);
       var cur_smallSlide = {id: this.id, title: this.cur_media.title, poster_path: this.cur_media.poster_path, media_type: this.media_type};
-      if(continue_list == null || continue_list.length == 0){
-        var list : smallSlide[] = [cur_smallSlide];
-        window.localStorage.setItem('continue_list', JSON.stringify(list));
+      if(this.continue_list == null || this.continue_list.length == 0){
+        this.continue_list = [cur_smallSlide];
       }else{
         // unique
-        if(continue_list.indexOf(cur_smallSlide) === -1) {
-          continue_list.unshift(cur_smallSlide);
+        var idx = this.continue_list.findIndex(x => x.id === cur_smallSlide.id);
+        if(idx > -1) {
+          this.continue_list.splice(idx, 1);
         }
+        this.continue_list.unshift(cur_smallSlide);
         // greater than 24, then start to drop
-        if(continue_list.length > 24){
-          continue_list.slice(24);
+        if(this.continue_list.length > 24){
+          this.continue_list.slice(24);
         }
       }
+      window.localStorage.setItem('continue_list', JSON.stringify(this.continue_list));
     })
 
     this._success.subscribe(message => this.showAlert = message);

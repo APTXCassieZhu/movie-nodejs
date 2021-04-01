@@ -14,22 +14,30 @@ router.get('/video/:id', function(req, res){
         if(len == 0){
             result += '"site": "Youtube",'
                 + '"type": "fake",'
-                + '"name": ' + data.data.results[i].name + ','
-                + '"key": "https://www.youtube.com/watch?v=' + data.data.results[i].key + '"}';
+                + '"name": "undefined",' 
+                + '"key": "tzkWB85ULJY"}';
         }
         var findTrailer = 0;
         for(var i = 0; i < len; i++){
             if(data.data.results[i].type == 'Trailer'){
                 findTrailer = 1;
-                result += '"site": ' + data.data.results[i].site + ','
-                    + '"type": ' + data.data.results[i].type + ','
-                    + '"name": ' + data.data.results[i].name + ','
-                    + '"key": "https://www.youtube.com/watch?v=' + data.data.results[i].key + '"}';
+                result += '"site": "' + data.data.results[i].site + '",'
+                    + '"type": "' + data.data.results[i].type + '",'
+                    + '"name": "' + data.data.results[i].name + '",'
+                    + '"key": "' + data.data.results[i].key + '"}';
                 break;
             }
         }  
         if(findTrailer == 0){
-
+            for(var i = 0; i < len; i++){
+                if(data.data.results[i].type == 'Teaser'){
+                    result += '"site": "' + data.data.results[i].site + '",'
+                        + '"type": "' + data.data.results[i].type + '",'
+                        + '"name": "' + data.data.results[i].name + '",'
+                        + '"key": "' + data.data.results[i].key + '"}';
+                    break;
+                }
+            }  
         }
         res.json(JSON.parse(result));
     }).catch(err => {
