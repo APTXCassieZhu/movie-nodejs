@@ -1,5 +1,5 @@
 <h1 class="slide-title" *ngIf="slideSum != 0">{{componentTitle}}</h1>
-<ngb-carousel *ngIf="slides.length > 1" [interval]="0">
+<ngb-carousel *ngIf="slideSum >= 6" [interval]="0">
   <ng-template ngbSlide *ngFor="let group of slides" >
     <div class="slide-image-wrapper">
       <div class="slide-image-container" *ngFor="let image of group">

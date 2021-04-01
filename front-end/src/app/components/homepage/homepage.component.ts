@@ -59,7 +59,7 @@ export class HomepageComponent implements OnInit {
     })
     var continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
     this.continue_watch = this.format(continue_list);
-    this.sum1 = this.continue_watch.length;
+    this.sum1 = continue_list.length;
 
     this.slideService.getPopularMovies().subscribe(res => {
       this.sum2 = Object.values(res)[0].length;
