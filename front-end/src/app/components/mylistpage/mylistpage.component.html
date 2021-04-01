@@ -1,1 +1,20 @@
-<p>mylistpage works!</p>
+<div *ngIf="watch_list.length == 0" class="list-empty">
+    <h1>No items found in Watchlist.</h1>
+</div>
+
+<div *ngIf="watch_list.length > 0" class="watch-list-wrapper">
+    <h1>My Watchlist</h1>
+    <div class="watch-list-container">
+        <div *ngFor="let image of watch_list">
+            <a href="/watch/{{image['media_type']}}/{{image['id']}}">
+                <div class="slide-image">
+                    <img [src]="image['poster_path']">
+                    <div class="mask">
+                        <p class="poster-title">{{image['title']}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+.list-empty{
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.watch-list-wrapper{
+    color: white;
+    max-width: 1350px;
+    margin: auto;
+    margin-top: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    display: flex;
+    flex-direction: column;
+    flex: center;
+}
+
+.watch-list-container{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+}
+
+.slide-image{
+    position: relative;
+    max-width: 220px;
+    max-height: 270px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.slide-image img{
+    width: 100%;
+    max-width: 182.25px;
+    max-height: 270px;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to bottom, rgba(7, 7, 7, 0.1),rgba(7, 7, 7, 0.1), rgba(7, 7, 7, 0.1), black, black);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: auto;
+}
+
+.slide-image:hover .mask{
+    opacity: 1;
+}
+.slide-image:hover img, .slide-image:hover .mask{
+    transform: scale(1.1);
+}
+
+.poster-title{
+    color: #F4F4F4;
+    float: left;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 85%;
+    left: 5%;
+    text-align: center;
+}

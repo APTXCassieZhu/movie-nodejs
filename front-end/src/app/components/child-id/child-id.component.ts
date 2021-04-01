@@ -45,12 +45,14 @@ export class ChildIdComponent implements OnInit {
   public cur_media: media = {} as media;
   public duration: string = '';
   public added: boolean = false;
-  public alert: Alert = {} as Alert;
+  public alert: Alert = ALERTS[0];
   public showAlert = '';
   private _success = new Subject<string>();
   facebook = faFacebookSquare;
   twitter = faTwitter;
   public continue_list: smallSlide[] = [];
+  public watch_list: smallSlide[] = [];
+  public cur_smallSlide : smallSlide = {} as smallSlide;
   constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }
   
   @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert = {} as NgbAlert; 
@@ -68,18 +70,17 @@ export class ChildIdComponent implements OnInit {
       
       // for local storage
       this.continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
-      console.log(this.continue_list);
-      console.log(this.cur_media);
-      var cur_smallSlide = {id: this.id, title: this.cur_media.title, poster_path: this.cur_media.poster_path, media_type: this.media_type};
+     
+      this.cur_smallSlide = {id: this.id, title: this.cur_media.title, poster_path: this.cur_media.poster_path, media_type: this.media_type};
       if(this.continue_list == null || this.continue_list.length == 0){
-        this.continue_list = [cur_smallSlide];
+        this.continue_list = [this.cur_smallSlide];
       }else{
         // unique
-        var idx = this.continue_list.findIndex(x => x.id === cur_smallSlide.id);
+        var idx = this.continue_list.findIndex(x => x.id === this.cur_smallSlide.id);
         if(idx > -1) {
           this.continue_list.splice(idx, 1);
         }
-        this.continue_list.unshift(cur_smallSlide);
+        this.continue_list.unshift(this.cur_smallSlide);
         // greater than 24, then start to drop
         if(this.continue_list.length > 24){
           this.continue_list.slice(24);
@@ -94,6 +95,12 @@ export class ChildIdComponent implements OnInit {
         this.selfClosingAlert.close();
       }
     });
+
+    // for local storage
+    this.watch_list = JSON.parse(window.localStorage.getItem('watch_list') || "[]");
+    // check if this movie/tv already in watch list or not
+    var idx = this.watch_list.findIndex(x => x.id === this.id);
+    this.added = (idx > -1) ? true : false;
   }
 
   addToWatchList(event: any){
@@ -101,11 +108,36 @@ export class ChildIdComponent implements OnInit {
     this.added = true;
     this.alert = ALERTS[0];
     this._success.next(`${new Date()} - Message successfully changed.`); 
+    
+    // update local storage
+    if(this.watch_list == null || this.watch_list.length == 0){
+      this.watch_list = [this.cur_smallSlide];
+    }else{
+      // unique
+      var idx = this.watch_list.findIndex(x => x.id === this.cur_smallSlide.id);
+      if(idx > -1) {
+        this.watch_list.splice(idx, 1);
+      }
+      this.watch_list.unshift(this.cur_smallSlide);
+      // greater than 24, then start to drop
+      if(this.watch_list.length > 24){
+        this.watch_list.slice(24);
+      }
+    }
+    window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));
   }
+
   removeFromWatchList(event: any){
     this.showAlert = '';
     this.added = false;
     this.alert = ALERTS[1];
     this._success.next(`${new Date()} - Message successfully changed.`); 
+    
+    // update local storage
+    var idx = this.watch_list.findIndex(x => x.id === this.cur_smallSlide.id);
+    this.watch_list.splice(idx, 1);
+    window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));
   }
+
+
 }
