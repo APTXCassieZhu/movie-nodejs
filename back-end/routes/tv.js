@@ -78,7 +78,12 @@ router.get('/:id', function(req, res){
                 result += '' + data.data.episode_run_time[i] + ',';
             }
         }
-        result += ']}';        
+        result += '],';
+        if(data.data.poster_path){
+            result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.poster_path + '"}';
+        }else{
+            result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
+        }
         res.json(JSON.parse(result));
     }).catch(err => {
         res.send(err);

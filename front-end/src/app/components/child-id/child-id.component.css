@@ -72,3 +72,30 @@
 .video-des-container ngb-alert{
     margin-top: 15px;
 }
+
+.detail-wrapper2{
+    width: 100%;
+    max-width: 1350px;
+    justify-content: center;
+    margin: auto;
+    margin-top: 30px;
+    color: white;
+}
+
+.share-wrapper{
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.share-wrapper p{
+    color: #9FA5C2;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+    margin-bottom: 30px;
+}
+
+fa-icon{
+    font-size: 30px;
+    margin-right: 7px;
+    cursor: pointer;
+}

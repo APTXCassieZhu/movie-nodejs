@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -33,7 +34,8 @@ import { SlideListComponent } from './components/slide-list/slide-list.component
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    FontAwesomeModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

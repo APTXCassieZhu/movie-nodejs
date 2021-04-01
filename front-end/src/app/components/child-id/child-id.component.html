@@ -1,4 +1,3 @@
-    
 <div class="detail-wrapper">
     <div class="video-wrapper">
         <div class="video-container">
@@ -12,7 +11,7 @@
     <div class="video-des-container">
         <h1>{{cur_media.title}}</h1>
         <div class="tagline-style">{{cur_media.tagline}}</div>
-        <div class="des-number-style">{{cur_media.release_date.substring(0,4)}} | &#9733; {{cur_media.vote_average}} | {{duration}}</div>
+        <div class="des-number-style">{{cur_media.release_date}} | &#9733; {{cur_media.vote_average}} | {{duration}}</div>
         <div class="des-list">Genres : <span *ngFor="let genre of cur_media.genres">{{genre}}</span></div>
         <div class="des-list">Spoken Languages : <span *ngFor="let language of cur_media.spoken_languages">{{language}}</span></div>
         <button *ngIf="!added" type="button" class="btn btn-primary add-btn" (click)="addToWatchList($event)">Add to Watchlist</button>
@@ -20,6 +19,12 @@
         <ngb-alert #selfClosingAlert *ngIf="showAlert" [type]="alert.type" (closed)="showAlert = ''">{{ alert.message }}</ngb-alert>
     </div>
 </div>
-
-<h5>Description</h5>
-<p>{{cur_media.overview}}</p>
+<div class="detail-wrapper2">
+    <div class="share-wrapper">
+        <h5>Description</h5>
+        <p>{{cur_media.overview}}</p>
+        <h5>Share</h5>
+        <fa-icon [icon]="twitter" style="color: #1E90FF"></fa-icon>
+        <fa-icon [icon]="facebook" style="color: #0000FF"></fa-icon>
+    </div>
+</div>
