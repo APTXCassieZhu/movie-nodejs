@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { smallSlide } from '../homepage/homepage.component';
+import { video } from '../youtube/youtube.component';
 
 export interface media{
   "title": string,
@@ -53,6 +54,9 @@ export class ChildIdComponent implements OnInit {
   public continue_list: smallSlide[] = [];
   public watch_list: smallSlide[] = [];
   public cur_smallSlide : smallSlide = {} as smallSlide;
+  public video: video = {} as video;
+  public twitterUrl : string = '';
+  public facebookUrl : string = '';
   constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }
   
   @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert = {} as NgbAlert; 
@@ -60,6 +64,10 @@ export class ChildIdComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.media_type = this.route.snapshot.paramMap.get('media_type');
+
+    this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
+      this.video = res;
+    })
 
     this.detailsService.getDetails(this.id, this.media_type).subscribe(res => {
       this.cur_media = res;
@@ -87,6 +95,11 @@ export class ChildIdComponent implements OnInit {
         }
       }
       window.localStorage.setItem('continue_list', JSON.stringify(this.continue_list));
+
+      // for share
+      this.twitterUrl = 'https://twitter.com/intent/tweet?text=Watch%20'+this.cur_media.title
+        +' https://www.youtube.com/watch?v='+ this.video.key +'       &hashtags=USC&hashtags=CSCI571&hashtags=FightOn';
+      this.facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=https://www.youtube.com/watch?v='+ this.video.key;
     })
 
     this._success.subscribe(message => this.showAlert = message);
@@ -101,6 +114,8 @@ export class ChildIdComponent implements OnInit {
     // check if this movie/tv already in watch list or not
     var idx = this.watch_list.findIndex(x => x.id === this.id);
     this.added = (idx > -1) ? true : false;
+
+    
   }
 
   addToWatchList(event: any){

@@ -17,9 +17,7 @@ export interface video{
   styleUrls: ['./youtube.component.css']
 })
 export class YoutubeComponent implements OnInit {
-  @Input() mediaId: any;
-  @Input() mediaType: any;
-  public video: video = {} as video;
+  @Input() videoId: any;
   constructor(private detailsService: DetailsService) { }
 
   ngOnInit(): void {
@@ -31,9 +29,7 @@ export class YoutubeComponent implements OnInit {
       document.body.appendChild(tag);
       apiLoaded = true;
     }
-    this.detailsService.getVideo(this.mediaId, this.mediaType).subscribe(res => {
-      this.video = res;
-    })
+    
   }
 
 }

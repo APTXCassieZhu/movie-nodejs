@@ -1,7 +1,7 @@
 <div class="detail-wrapper">
     <div class="video-wrapper">
         <div class="video-container">
-        <app-youtube [mediaId]="id" [mediaType]="media_type"></app-youtube>
+            <app-youtube [videoId]="video.key"></app-youtube>
         </div>
     </div>
     <div class="video-des-container">
@@ -20,7 +20,13 @@
         <h5>Description</h5>
         <p>{{cur_media.overview}}</p>
         <h5>Share</h5>
-        <fa-icon [icon]="twitter" style="color: #1E90FF"></fa-icon>
-        <fa-icon [icon]="facebook" style="color: #0000FF"></fa-icon>
+        <a  href="{{twitterUrl}}"
+            target="_blank">
+            <fa-icon [icon]="twitter" style="color: #1E90FF"></fa-icon>
+        </a>
+        <a  href="{{facebookUrl}}"
+            target="_blank">
+            <fa-icon [icon]="facebook" style="color: #0000FF"></fa-icon>
+        </a>
     </div>
 </div>
