@@ -26,7 +26,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -44,7 +44,9 @@ export class NavBarComponent implements OnInit {
   }
 
   viewSearchResultDetail(event: any, media_type: string, id: number){
-    this.router.navigateByUrl('/watch/'+media_type+'/'+id);
+    // this.router.navigate(['/watch/', {media_type: media_type, id: id}]);
+    // this.router.navigateByUrl('/watch/'+media_type+'/'+id);
+    document.location.href = '/watch/'+media_type+'/'+id;
   }
 }
 

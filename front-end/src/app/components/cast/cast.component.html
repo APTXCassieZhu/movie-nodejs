@@ -1,5 +1,5 @@
 <div class="cast-wrapper">
-    <h1>Full Cast and Crew</h1>
+    <h1 *ngIf="castList.length != 0">Full Cast and Crew</h1>
     <div class="cast-card-container">
         <div class="card cast-card" *ngFor="let cast of castList" (click)="viewCastDetail(content, cast.id)">
             <img class="card-img-top cast-img" src={{cast.profile_path}}>

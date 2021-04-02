@@ -136,4 +136,56 @@ router.get('/:id/reviews', function(req, res){
         res.send(err);
     })
 })
+
+// recommend
+router.get('/:id/recommend', function(req, res){
+    var api_key = config.API_KEY;
+    var id = req.params.id;   
+    let url = "https://api.themoviedb.org/3/tv/"+id+"/recommendations?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {
+        var len = data.data.results.length;
+        var result = '{"resultList":['
+        for(var i = 0; i < len; i++){
+            if(i != 0){
+                result += ',';
+            }
+            result += '{'
+                + '"id":' + data.data.results[i].id + ','
+                + '"title":"' + data.data.results[i].name + '",'
+                + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+        }        
+        result += ']}';
+        console.log(result);
+        
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
+// similar
+router.get('/:id/similar', function(req, res){
+    var api_key = config.API_KEY;
+    var id = req.params.id;   
+    let url = "https://api.themoviedb.org/3/tv/"+id+"/similar?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {
+        var len = data.data.results.length;
+        var result = '{"resultList":['
+        for(var i = 0; i < len; i++){
+            if(i != 0){
+                result += ',';
+            }
+            result += '{'
+                + '"id":' + data.data.results[i].id + ','
+                + '"title":"' + data.data.results[i].name + '",'
+                + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+        }        
+        result += ']}';
+        console.log(result);
+        
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
 module.exports = router;
