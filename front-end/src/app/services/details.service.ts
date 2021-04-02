@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from "@angular/common/http";
 import { MediaDetail } from "../components/child-id/child-id.component"
+import { CastDetail, CastExternal } from "../components/cast/cast.component"
 import { Video } from "../components/youtube/youtube.component"
 
 @Injectable({
@@ -20,5 +21,13 @@ export class DetailsService {
   getCast(id: string, media_type: string){
     let url = "http://localhost:8080/cast/"+media_type+"/"+id;
     return this.httpClient.get(url);
+  }
+  getCastDetail(id: number){
+    let url = "http://localhost:8080/cast/"+id;
+    return this.httpClient.get<CastDetail>(url);
+  }
+  getCastShare(id: number){
+    let url = "http://localhost:8080/cast/"+id+"/ex/share";
+    return this.httpClient.get<CastExternal>(url);
   }
 }

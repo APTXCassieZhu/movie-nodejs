@@ -23,6 +23,7 @@
     width: 12rem;
     border-radius: 1rem;
     border-width: 0px;
+    cursor: pointer;
 }
 
 .cast-img{
@@ -44,4 +45,41 @@
     color: #424242;
     font-size: 15px;
     margin: 0;
+}
+
+/* modal */
+::ng-deep .modal-content{
+    height: fit-content;
+}
+.modal-top-container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+}
+.modal-top-container img{
+    width: 30%;
+}
+.cast-info-list{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 2.5rem
+}
+
+.cast-info-list p, .modal-body p{
+    color: #636669;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.social-list{
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+}
+.social-list a{
+    margin-right: 0.5rem;
+}
+*{
+    height: fit-content;
 }

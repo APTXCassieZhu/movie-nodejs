@@ -1,13 +1,57 @@
 <div class="cast-wrapper">
     <h1>Full Cast and Crew</h1>
     <div class="cast-card-container">
-        <div class="card cast-card" *ngFor="let cast of castList">
+        <div class="card cast-card" *ngFor="let cast of castList" (click)="viewCastDetail(content, cast.id)">
             <img class="card-img-top cast-img" src={{cast.profile_path}}>
             <div class="cast-card-body">
                 <p class="cast-title">{{cast.name}}</p>
                 <p class="cast-title">AS</p>
                 <p class="cast-text">{{cast.character}}</p>
             </div>
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title">{{cast.name}}</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-top-container">
+                        <img src={{cast.profile_path}}>
+                        <div class="cast-info-list">
+                            <p *ngIf="cur_cast.birthday">Birth: {{cur_cast.birthday}}</p>
+                            <p *ngIf="cur_cast.place_of_birth">Birth Place: {{cur_cast.place_of_birth}}</p>
+                            <p *ngIf="cur_cast.gender">Gender: {{cur_cast.gender}}</p>
+                            <p *ngIf="cur_cast.known_for_department">Known for: {{cur_cast.known_for_department}}</p>
+                            <p *ngIf="cur_cast.also_known_as">Also Known as: {{cur_cast.also_known_as}}</p>
+                            <div class="social-list">
+                            <a  *ngIf="cur_share.imdb_id != 'null'"
+                                href="https://www.imdb.com/name/{{cur_share.imdb_id}}"
+                                target="_blank">
+                                <fa-icon [icon]="imdb" style="color: #E2B62B"></fa-icon>
+                            </a>
+                            <a  *ngIf="cur_share.instagram_id != 'null'"
+                                href="https://www.instagram.com/{{cur_share.instagram_id}}"
+                                target="_blank">
+                                <fa-icon [icon]="ins" style="color: #870E87"></fa-icon>
+                            </a>
+                            <a  *ngIf="cur_share.twitter_id != 'null'"
+                                href="https://www.twitter.com/{{cur_share.twitter_id}}"
+                                target="_blank">
+                                <fa-icon [icon]="twitter" style="color: #1E90FF"></fa-icon>
+                            </a>
+                            <a  *ngIf="cur_share.facebook_id != 'null'"
+                                href="https://www.facebook.com/{{cur_share.facebook_id}}"
+                                target="_blank">
+                                <fa-icon [icon]="facebook" style="color: #0000FF"></fa-icon>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 *ngIf="cur_cast.biography">Biography</h2>
+                    <p *ngIf="cur_cast.biography">{{cur_cast.biography}}</p>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>
