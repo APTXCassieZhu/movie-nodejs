@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { SlideService } from "../../services/slide.service"
 
 
-export interface slide{
+export interface Slide{
   id: number;
   title: string;
   backdrop_path: string;
 }
 
-export interface smallSlide{
+export interface SmallSlide{
   id: number;
   title: string;
   poster_path: string;
@@ -23,14 +23,14 @@ export interface smallSlide{
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  public now_play: slide[] = [];
-  public continue_watch: smallSlide[][] = [];
-  public popular_movies: smallSlide[][] = [];
-  public toprated_movies: smallSlide[][] = [];
-  public trending_movies: smallSlide[][] = [];
-  public popular_tv: smallSlide[][] = [];
-  public toprated_tv: smallSlide[][] = [];
-  public trending_tv: smallSlide[][] = [];
+  public now_play: Slide[] = [];
+  public continue_watch: SmallSlide[][] = [];
+  public popular_movies: SmallSlide[][] = [];
+  public toprated_movies: SmallSlide[][] = [];
+  public trending_movies: SmallSlide[][] = [];
+  public popular_tv: SmallSlide[][] = [];
+  public toprated_tv: SmallSlide[][] = [];
+  public trending_tv: SmallSlide[][] = [];
   public title1: string = 'Continue Watching';
   public title2: string = 'Popular Movies';
   public title3: string = 'Top Rated Movies';
@@ -106,7 +106,7 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  format(slides: smallSlide[]){
+  format(slides: SmallSlide[]){
     this.tempFormatted = [];
     var j = -1;
 

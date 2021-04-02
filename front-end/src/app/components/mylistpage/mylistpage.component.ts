@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { smallSlide } from '../homepage/homepage.component';
+import { SmallSlide } from '../homepage/homepage.component';
 
 @Component({
   selector: 'app-mylistpage',
@@ -8,7 +8,7 @@ import { smallSlide } from '../homepage/homepage.component';
   styleUrls: ['./mylistpage.component.css']
 })
 export class MylistpageComponent implements OnInit {
-  public watch_list: smallSlide[] = [];
+  public watch_list: SmallSlide[] = [];
   // public format_watch_list: smallSlide[][] = [];
   public fomatted : any;
   constructor() { }

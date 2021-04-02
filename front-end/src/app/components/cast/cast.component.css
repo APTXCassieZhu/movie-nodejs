@@ -12,7 +12,7 @@
 
 .cast-card-container{
     display: -webkit-inline-box;
-    overflow-x: auto;
+    overflow-x: scroll;
     padding-bottom: 1rem;
 }
 
@@ -22,9 +22,26 @@
     margin-right: 1%;
     width: 12rem;
     border-radius: 1rem;
+    border-width: 0px;
 }
 
 .cast-img{
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+}
+
+.cast-card-body{
+    text-align: center;
+    padding: 10px;
+}
+
+.cast-title{
+    font-weight: bold;
+    margin: 0;
+}
+
+.cast-text{
+    color: #424242;
+    font-size: 15px;
+    margin: 0;
 }

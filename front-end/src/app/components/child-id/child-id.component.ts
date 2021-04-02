@@ -7,10 +7,11 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
-import { smallSlide } from '../homepage/homepage.component';
-import { video } from '../youtube/youtube.component';
 
-export interface media{
+import { SmallSlide } from '../homepage/homepage.component';
+import { Video } from '../youtube/youtube.component';
+
+export interface MediaDetail{
   "title": string,
   "release_date": string,
   "runtime": number[],
@@ -43,7 +44,7 @@ const ALERTS: Alert[] = [{
 export class ChildIdComponent implements OnInit {
   public id : any;
   public media_type: any;
-  public cur_media: media = {} as media;
+  public cur_media: MediaDetail = {} as MediaDetail;
   public duration: string = '';
   public added: boolean = false;
   public alert: Alert = ALERTS[0];
@@ -51,10 +52,10 @@ export class ChildIdComponent implements OnInit {
   private _success = new Subject<string>();
   facebook = faFacebookSquare;
   twitter = faTwitter;
-  public continue_list: smallSlide[] = [];
-  public watch_list: smallSlide[] = [];
-  public cur_smallSlide : smallSlide = {} as smallSlide;
-  public video: video = {} as video;
+  public continue_list: SmallSlide[] = [];
+  public watch_list: SmallSlide[] = [];
+  public cur_smallSlide : SmallSlide = {} as SmallSlide;
+  public video: Video = {} as Video;
   public twitterUrl : string = '';
   public facebookUrl : string = '';
   constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }

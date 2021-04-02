@@ -4,7 +4,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { DetailsService } from "../../services/details.service"
 
 let apiLoaded = false;
-export interface video{
+export interface Video{
   site: string,
   type: string,
   name: string,
