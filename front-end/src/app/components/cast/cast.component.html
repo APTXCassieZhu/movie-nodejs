@@ -25,26 +25,26 @@
                             <p *ngIf="cur_cast.known_for_department">Known for: {{cur_cast.known_for_department}}</p>
                             <p *ngIf="cur_cast.also_known_as">Also Known as: {{cur_cast.also_known_as}}</p>
                             <div class="social-list">
-                            <a  *ngIf="cur_share.imdb_id != 'null'"
-                                href="https://www.imdb.com/name/{{cur_share.imdb_id}}"
-                                target="_blank">
-                                <fa-icon [icon]="imdb" style="color: #E2B62B"></fa-icon>
-                            </a>
-                            <a  *ngIf="cur_share.instagram_id != 'null'"
-                                href="https://www.instagram.com/{{cur_share.instagram_id}}"
-                                target="_blank">
-                                <fa-icon [icon]="ins" style="color: #870E87"></fa-icon>
-                            </a>
-                            <a  *ngIf="cur_share.twitter_id != 'null'"
-                                href="https://www.twitter.com/{{cur_share.twitter_id}}"
-                                target="_blank">
-                                <fa-icon [icon]="twitter" style="color: #1E90FF"></fa-icon>
-                            </a>
-                            <a  *ngIf="cur_share.facebook_id != 'null'"
-                                href="https://www.facebook.com/{{cur_share.facebook_id}}"
-                                target="_blank">
-                                <fa-icon [icon]="facebook" style="color: #0000FF"></fa-icon>
-                            </a>
+                                <a  *ngIf="cur_share.imdb_id != 'null'"
+                                    href="https://www.imdb.com/name/{{cur_share.imdb_id}}"
+                                    target="_blank">
+                                    <fa-icon [icon]="imdb" style="color: #E2B62B" ngbPopover="Visit IMDB" triggers="mouseenter:mouseleave"></fa-icon>
+                                </a>
+                                <a  *ngIf="cur_share.instagram_id != 'null'"
+                                    href="https://www.instagram.com/{{cur_share.instagram_id}}"
+                                    target="_blank">
+                                    <fa-icon [icon]="ins" style="color: #870E87" ngbPopover="Visit Instagram" triggers="mouseenter:mouseleave"></fa-icon>
+                                </a>
+                                <a  *ngIf="cur_share.twitter_id != 'null'"
+                                    href="https://www.twitter.com/{{cur_share.twitter_id}}"
+                                    target="_blank">
+                                    <fa-icon [icon]="twitter" style="color: #1E90FF" ngbPopover="Visit Twitter" triggers="mouseenter:mouseleave"></fa-icon>
+                                </a>
+                                <a  *ngIf="cur_share.facebook_id != 'null'"
+                                    href="https://www.facebook.com/{{cur_share.facebook_id}}"
+                                    target="_blank">
+                                    <fa-icon [icon]="facebook" style="color: #0000FF" ngbPopover="Visit Facebook" triggers="mouseenter:mouseleave"></fa-icon>
+                                </a>
                             </div>
                         </div>
                     </div>
