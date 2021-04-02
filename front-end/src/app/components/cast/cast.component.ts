@@ -74,7 +74,6 @@ export class CastComponent implements OnInit {
     })
     this.detailsService.getCastShare(castId).subscribe(res => {
       this.cur_share = res;
-      console.log(this.cur_share);
     })
   }
 }

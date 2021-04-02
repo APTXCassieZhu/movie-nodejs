@@ -9,3 +9,71 @@
     padding-left: 3%;
     padding-right: 3%;
 }
+.review-content-wrapper{
+    display: flex;
+    flex-direction: row;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.img-container{
+    margin-right: 2rem;
+}
+
+.img-container img{
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+}
+
+.review-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.review-wrapper span{
+    color:#6C757D;
+    margin-left: 1rem;
+}
+.review-card{
+    margin-bottom: 1rem;
+}
+.review-title{
+    color: black;
+    display: flex;
+    flex-direction: row;
+}
+
+.review-title h5{
+    margin: 0;
+    font-weight: bold;
+}
+
+.review-time{
+    color: #9C9694;
+    font-size: 0.85rem;
+    margin-top: 2rem;
+}
+
+.review-content{
+    color: #1F1F1F;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.review-rate-box{
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+    min-width: 2.5rem;
+    text-align: center;
+    font-size: 14px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.5rem;
+}
