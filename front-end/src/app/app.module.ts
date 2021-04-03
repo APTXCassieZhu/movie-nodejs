@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LayoutModule } from '@angular/cdk/layout';
+
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -37,7 +39,8 @@ import { ReviewComponent } from './components/review/review.component';
     HttpClientModule,
     FormsModule,
     YouTubePlayerModule,
-    FontAwesomeModule 
+    FontAwesomeModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

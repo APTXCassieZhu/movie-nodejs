@@ -22,14 +22,12 @@
 
 .slide-image{
     position: relative;
-    width: 182.25px;
-    height: 270px;
+    max-width: 182.25px;
+    max-height: 270px; 
 }
 
 .slide-image img{
     width: 100%;
-    /* max-width: 220px;
-    max-height: 270px; */
     height: 100%;
 }
 
