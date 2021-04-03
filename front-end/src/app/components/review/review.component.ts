@@ -28,6 +28,14 @@ export class ReviewComponent implements OnInit {
   constructor(private detailsService: DetailsService) { }
 
   ngOnInit(): void {
+  //   this.loadPage();
+  // }
+  // ngOnChanges(): void {
+  //   this.loadPage();
+  //   console.log('review reload');
+  // }
+
+  // loadPage(): void{
     this.detailsService.getReview(this.mediaId, this.mediaType).subscribe(res => {
       var len = res.length;
       if(len > 10){
@@ -56,6 +64,7 @@ export class ReviewComponent implements OnInit {
           hour -= 12;
         }
         this.reviewList[i].created_at = month+' '+day+', '+year+', '+hour+this.reviewList[i].created_at.substring(13, 19)+' '+mm;
+        console.log(this.reviewList);
       }
     })
   }

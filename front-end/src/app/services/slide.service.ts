@@ -36,4 +36,13 @@ export class SlideService {
     let url = "http://localhost:8080/slide/trending/tv";
     return this.httpClient.get(url);
   }
+
+  getRecommend(id: string, media_type: string){
+    let url = "http://localhost:8080/"+media_type+"/"+id+"/recommend";
+    return this.httpClient.get(url);
+  }
+  getSimilar(id: string, media_type: string){
+    let url = "http://localhost:8080/"+media_type+"/"+id+"/similar";
+    return this.httpClient.get(url);
+  }
 }

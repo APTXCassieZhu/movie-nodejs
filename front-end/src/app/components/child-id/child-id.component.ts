@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faFacebookSquare, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
+import { SlideService } from "../../services/slide.service"
 import { DetailsService } from "../../services/details.service"
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
@@ -58,10 +59,21 @@ export class ChildIdComponent implements OnInit {
   public video: Video = {} as Video;
   public twitterUrl : string = '';
   public facebookUrl : string = '';
-  constructor(private route: ActivatedRoute, private detailsService: DetailsService) { }
+
+  public title1: string = 'Recommended Movies';
+  public title2: string = 'Similar Movies';
+  public sum1: number = 0;
+  public sum2: number = 0;
+  public recommend_list: SmallSlide[][] = [];
+  public similar_list: SmallSlide[][] = [];
+  tempFormatted : any[] = [];
+  constructor(private route: ActivatedRoute, 
+    private detailsService: DetailsService, 
+    private cd: ChangeDetectorRef,
+    private slideService: SlideService) { }
   
   @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert = {} as NgbAlert; 
-
+  
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.media_type = this.route.snapshot.paramMap.get('media_type');
@@ -116,7 +128,14 @@ export class ChildIdComponent implements OnInit {
     var idx = this.watch_list.findIndex(x => x.id === this.id);
     this.added = (idx > -1) ? true : false;
 
-    
+    this.slideService.getRecommend(this.id, this.media_type).subscribe(res => {
+      this.sum1 = Object.values(res)[0].length;
+      this.recommend_list = this.format(Object.values(res)[0]);
+    })
+    this.slideService.getSimilar(this.id, this.media_type).subscribe(res => {
+      this.sum2 = Object.values(res)[0].length;
+      this.similar_list = this.format(Object.values(res)[0]);
+    })
   }
 
   addToWatchList(event: any){
@@ -141,6 +160,7 @@ export class ChildIdComponent implements OnInit {
       }
     }
     window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));
+    // this.cd.detectChanges();
   }
 
   removeFromWatchList(event: any){
@@ -155,5 +175,20 @@ export class ChildIdComponent implements OnInit {
     window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));
   }
 
+  format(slides: SmallSlide[]){
+    this.tempFormatted = [];
+    var j = -1;
 
+    for (var i = 0; i < slides.length; i++) {
+        if (i % 6 == 0) {
+            j++;
+            this.tempFormatted[j] = [];
+            this.tempFormatted[j].push(slides[i]);
+        }
+        else {
+            this.tempFormatted[j].push(slides[i]);
+        }
+    }
+    return this.tempFormatted;
+  }
 }
