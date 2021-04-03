@@ -25,7 +25,7 @@
 
 .slide-image{
     position: relative;
-    max-width: 220px;
+    max-width: 182.25px;
     max-height: 270px;
     margin-left: 5%;
     margin-right: 5%;
@@ -35,8 +35,8 @@
 
 .slide-image img{
     width: 100%;
-    max-width: 182.25px;
-    max-height: 270px;
+    /* max-width: 182.25px;
+    max-height: 270px; */
 }
 
 .mask {
