@@ -145,9 +145,7 @@ router.get('/:id/recommend', function(req, res){
                 + '"title":"' + data.data.results[i].title + '",'
                 + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
         }        
-        result += ']}';
-        console.log(result);
-        
+        result += ']}';        
         res.json(JSON.parse(result));
     }).catch(err => {
         res.send(err);
@@ -171,9 +169,7 @@ router.get('/:id/similar', function(req, res){
                 + '"title":"' + data.data.results[i].title + '",'
                 + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
         }        
-        result += ']}';
-        console.log(result);
-        
+        result += ']}';        
         res.json(JSON.parse(result));
     }).catch(err => {
         res.send(err);

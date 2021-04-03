@@ -35,4 +35,12 @@ export class DetailsService {
     let url = "http://localhost:8080/"+media_type+"/"+id+"/reviews";
     return this.httpClient.get<Review[]>(url);
   }
+  getRecommend(id: string, media_type: string){
+    let url = "http://localhost:8080/"+media_type+"/"+id+"/recommend";
+    return this.httpClient.get(url);
+  }
+  getSimilar(id: string, media_type: string){
+    let url = "http://localhost:8080/"+media_type+"/"+id+"/similar";
+    return this.httpClient.get(url);
+  }
 }

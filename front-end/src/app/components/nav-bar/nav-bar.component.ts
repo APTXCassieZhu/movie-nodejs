@@ -19,12 +19,15 @@ export interface Media{
 })
 export class NavBarComponent implements OnInit {
   public query: string = '';
-  public activePage = "1";
+  public activePage = 1;
   public searchResult: Media[] = [];
   constructor(private searchService: SearchService, 
               private router: Router) { }
 
   ngOnInit(): void {
+    if(document.URL.indexOf('watch') !== -1){
+      this.activePage = 3;
+    }
   }
   
   search = (text$: Observable<string>) =>
@@ -48,5 +51,6 @@ export class NavBarComponent implements OnInit {
     // this.router.navigateByUrl('/watch/'+media_type+'/'+id);
     document.location.href = '/watch/'+media_type+'/'+id;
   }
+
 }
 

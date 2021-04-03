@@ -1,5 +1,5 @@
 <nav>
-    <a class="nav-title" routerLink="/">USC Films</a>
+    <a class="nav-title" routerLink="/" (click)="activePage = 1">USC Films</a>
     <div ngbNav #nav="ngbNav" [(activeId)]="activePage">
         <span [ngbNavItem]="1">
             <a ngbNavLink class="nav-tab" routerLink="/">Home</a>
