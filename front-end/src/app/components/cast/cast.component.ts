@@ -17,6 +17,7 @@ export interface CastDetail{
   birthday: any,
   place_of_birth: any,
   gender: any,
+  homepage: any,
   known_for_department: any,
   also_known_as: any,
   biography: any
