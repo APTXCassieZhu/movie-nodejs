@@ -21,6 +21,7 @@ export class NavBarComponent implements OnInit {
   public query: string = '';
   public activePage = 1;
   public searchResult: Media[] = [];
+  public isMenuCollapsed = true;
   constructor(private searchService: SearchService, 
               private router: Router) { }
 

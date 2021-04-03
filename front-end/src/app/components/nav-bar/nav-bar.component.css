@@ -2,18 +2,17 @@ nav{
     background-color: #010C20;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    height: 50px;
+    /* height: 50px;
     display: flex;
     flex-direction: row;
+    width: 100%; */
     position: sticky;
     top: 0;
     z-index: 10;
-    width: 100%;
 }
 
 nav a{
     text-decoration: none;
-    line-height: 50px;
     margin-left: 50px;
 }
 
@@ -29,23 +28,18 @@ nav a{
     margin-left: 30px;
 }
 
-.active{
-    color: white;
-}
-
 .nav-tab:hover{
     color: rgba(255, 255, 255, 0.833);
 }
 
 .nav-search{
-    margin-right: 50px;
-    margin-left: auto;
-    margin-top: 12px;
+    /* right: 50px;
+    position: absolute; */
+    margin-left: auto; 
     border: none; 
     border-bottom: 1px solid white;
     outline: none;
     background-color: #010C20;
-    height: 30px;
     font-size: 18px;
     color: white;
 }
@@ -75,4 +69,9 @@ nav a{
 }
 ::ng-deep .dropdown-item{
     color: white;
+}
+
+.mobile-btn{
+    color: #646F81;
+    border: 0.5px solid #0D182E;
 }

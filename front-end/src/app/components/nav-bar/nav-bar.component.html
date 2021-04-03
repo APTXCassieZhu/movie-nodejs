@@ -1,26 +1,33 @@
-<nav>
-    <a class="nav-title" routerLink="/" (click)="activePage = 1">USC Films</a>
-    <div ngbNav #nav="ngbNav" [(activeId)]="activePage">
-        <span [ngbNavItem]="1">
-            <a ngbNavLink class="nav-tab" routerLink="/">Home</a>
-        </span>
-        <span [ngbNavItem]="2">
-             <a ngbNavLink class="nav-tab" routerLink="/mylist">My List</a>
-        </span>
-    </div>
-    <input id="typeahead-template" type="text" 
+<nav class="navbar navbar-expand-lg mb-3">
+    <a class="nav-title" routerLink="/" (click)="activePage = 1; isMenuCollapsed = true">USC Films</a>
+
+  <button class="navbar-toggler mobile-btn" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul class="navbar-nav" ngbNav #nav="ngbNav" [(activeId)]="activePage">
+      <li class="nav-item" [ngbNavItem]="1">
+        <a ngbNavLink class="nav-tab" routerLink="/" (click)="isMenuCollapsed = true">Home</a>
+      </li>
+      <li class="nav-item" [ngbNavItem]="2">
+        <a ngbNavLink class="nav-tab" routerLink="/mylist" (click)="isMenuCollapsed = true">My List</a>
+      </li>
+      <li><input id="typeahead-template" type="text" 
         class="nav-search" 
         placeholder="Search"
         [(ngModel)]="query"
         [ngbTypeahead]="search"
         [resultTemplate]="rt"
         [inputFormatter]="formatter"
-    />
-    <ng-template #rt let-r="result" let-t="term" class="result-list">
-        <div (click)="viewSearchResultDetail($event, r['media_type'], r['id'])">
-            <img [src]="r['backdrop_path']" class="search-img">
-            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
-        </div>
-    </ng-template>
-    
-</nav>
+    /></li>
+    </ul>
+  </div>
+</nav> 
+
+<ng-template #rt let-r="result" let-t="term" class="result-list">
+    <div (click)="viewSearchResultDetail($event, r['media_type'], r['id'])">
+        <img [src]="r['backdrop_path']" class="search-img">
+        <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+    </div>
+</ng-template>
