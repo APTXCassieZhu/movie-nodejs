@@ -6,7 +6,7 @@ import { SlideService } from "../../services/slide.service"
 import { DetailsService } from "../../services/details.service"
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, min } from 'rxjs/operators';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 import { SmallSlide } from '../homepage/homepage.component';
@@ -46,7 +46,7 @@ export class ChildIdComponent implements OnInit {
   public id : any;
   public media_type: any;
   public cur_media: MediaDetail = {} as MediaDetail;
-  public duration: string = '';
+  public number_info: string = '';
   public added: boolean = false;
   public alert: Alert = ALERTS[0];
   public showAlert = '';
@@ -83,11 +83,31 @@ export class ChildIdComponent implements OnInit {
 
     this.detailsService.getDetails(this.id, this.media_type).subscribe(res => {
       this.cur_media = res;
-      this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
+      if(this.cur_media.release_date){
+        this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
+        this.number_info = this.cur_media.release_date;
+      }
+      if(this.cur_media.vote_average){
+        if(this.number_info != ''){
+          this.number_info += ' | ';
+        }
+        this.number_info += '&#9733; '+this.cur_media.vote_average;
+      }
       var hours = Math.floor(this.cur_media.runtime[0] / 60);
       var minutes = this.cur_media.runtime[0] % 60;
-      this.duration = hours + 'hrs ' + minutes + 'mins';
-      
+      var duration = '';
+      if(hours && hours != 0){
+        duration = hours + 'hrs ';
+      }
+      if(minutes && minutes != 0){
+        duration += minutes + 'mins';
+      }
+      if(duration != ''){
+        if(this.number_info != ''){
+          this.number_info += ' | ';
+        }
+        this.number_info += duration;
+      }
       // for local storage
       this.continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
      
