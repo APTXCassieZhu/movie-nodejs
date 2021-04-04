@@ -18,9 +18,11 @@
 }
 
 .watch-list-container{
-    display: flex;
-    width: 100%;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    /* grid-auto-rows: 200px; */
+    grid-gap: 10px;
+    justify-content: center;
 }
 
 .slide-image{
@@ -35,8 +37,6 @@
 
 .slide-image img{
     width: 100%;
-    /* max-width: 182.25px;
-    max-height: 270px; */
 }
 
 .mask {
@@ -71,3 +71,5 @@
     text-align: left;
     margin: 0;
 }
+
+
