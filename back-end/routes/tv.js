@@ -152,8 +152,12 @@ router.get('/:id/recommend', function(req, res){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
                 + '"title":"' + data.data.results[i].name + '",'
-                + '"media_type":"tv",'
-                + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+                + '"media_type":"tv",';
+            if(data.data.results[i].poster_path){
+                result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+            }else{
+                result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
+            }
         }        
         result += ']}';        
         res.json(JSON.parse(result));
@@ -177,8 +181,12 @@ router.get('/:id/similar', function(req, res){
             result += '{'
                 + '"id":' + data.data.results[i].id + ','
                 + '"title":"' + data.data.results[i].name + '",'
-                + '"media_type":"tv",'
-                + '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+                + '"media_type":"tv",';
+            if(data.data.results[i].poster_path){
+                result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+            }else{
+                result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
+            }
         }        
         result += ']}';        
         res.json(JSON.parse(result));
