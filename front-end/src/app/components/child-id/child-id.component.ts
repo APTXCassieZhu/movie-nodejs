@@ -46,13 +46,16 @@ export class ChildIdComponent implements OnInit {
   public id : any;
   public media_type: any;
   public cur_media: MediaDetail = {} as MediaDetail;
-  public number_info: string = '';
+
+  public duration: string = '';
+
   public added: boolean = false;
   public alert: Alert = ALERTS[0];
   public showAlert = '';
   private _success = new Subject<string>();
   facebook = faFacebookSquare;
   twitter = faTwitter;
+
   public continue_list: SmallSlide[] = [];
   public watch_list: SmallSlide[] = [];
   public cur_smallSlide : SmallSlide = {} as SmallSlide;
@@ -83,32 +86,17 @@ export class ChildIdComponent implements OnInit {
 
     this.detailsService.getDetails(this.id, this.media_type).subscribe(res => {
       this.cur_media = res;
-      if(this.cur_media.release_date){
-        this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
-        this.number_info = this.cur_media.release_date;
-      }
-      if(this.cur_media.vote_average){
-        if(this.number_info != ''){
-          this.number_info += ' | ';
-        }
-        this.number_info += '&#9733; '+this.cur_media.vote_average;
-      }
+      this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
+      
       var hours = Math.floor(this.cur_media.runtime[0] / 60);
       var minutes = this.cur_media.runtime[0] % 60;
-      var duration = '';
       if(hours && hours != 0){
-        duration = hours + 'hrs ';
+        this.duration = hours + 'hrs ';
       }
       if(minutes && minutes != 0){
-        duration += minutes + 'mins';
+        this.duration += minutes + 'mins';
       }
-      if(duration != ''){
-        if(this.number_info != ''){
-          this.number_info += ' | ';
-        }
-        this.number_info += duration;
-      }
-      // for local storage
+    
       this.continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
      
       this.cur_smallSlide = {id: this.id, title: this.cur_media.title, poster_path: this.cur_media.poster_path, media_type: this.media_type};
