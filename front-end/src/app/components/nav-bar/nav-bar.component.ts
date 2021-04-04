@@ -26,11 +26,16 @@ export class NavBarComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    console.log(document.URL)
     if(document.URL.indexOf('watch') !== -1){
       this.activePage = 3;
+    }else if(document.URL.indexOf('mylist') !== -1){
+      this.activePage = 2;
+    }else{
+      this.activePage = 1;
     }
   }
-  
+
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
