@@ -64,9 +64,8 @@ export class ChildIdComponent implements OnInit {
   public title2: string = 'Similar Movies';
   public sum1: number = 0;
   public sum2: number = 0;
-  public recommend_list: SmallSlide[][] = [];
-  public similar_list: SmallSlide[][] = [];
-  tempFormatted : any[] = [];
+  public recommend_list: SmallSlide[] = [];
+  public similar_list: SmallSlide[] = [];
   constructor(private route: ActivatedRoute, 
     private detailsService: DetailsService, 
     private cd: ChangeDetectorRef,
@@ -130,11 +129,11 @@ export class ChildIdComponent implements OnInit {
 
     this.slideService.getRecommend(this.id, this.media_type).subscribe(res => {
       this.sum1 = Object.values(res)[0].length;
-      this.recommend_list = this.format(Object.values(res)[0]);
+      this.recommend_list = Object.values(res)[0];
     })
     this.slideService.getSimilar(this.id, this.media_type).subscribe(res => {
       this.sum2 = Object.values(res)[0].length;
-      this.similar_list = this.format(Object.values(res)[0]);
+      this.similar_list = Object.values(res)[0];
     })
   }
 
@@ -173,22 +172,5 @@ export class ChildIdComponent implements OnInit {
     var idx = this.watch_list.findIndex(x => x.id === this.cur_smallSlide.id);
     this.watch_list.splice(idx, 1);
     window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));
-  }
-
-  format(slides: SmallSlide[]){
-    this.tempFormatted = [];
-    var j = -1;
-
-    for (var i = 0; i < slides.length; i++) {
-        if (i % 6 == 0) {
-            j++;
-            this.tempFormatted[j] = [];
-            this.tempFormatted[j].push(slides[i]);
-        }
-        else {
-            this.tempFormatted[j].push(slides[i]);
-        }
-    }
-    return this.tempFormatted;
   }
 }

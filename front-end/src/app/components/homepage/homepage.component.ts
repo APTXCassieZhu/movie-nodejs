@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { SlideService } from "../../services/slide.service"
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 
 export interface Slide{
@@ -24,13 +25,13 @@ export interface SmallSlide{
 })
 export class HomepageComponent implements OnInit {
   public now_play: Slide[] = [];
-  public continue_watch: SmallSlide[][] = [];
-  public popular_movies: SmallSlide[][] = [];
-  public toprated_movies: SmallSlide[][] = [];
-  public trending_movies: SmallSlide[][] = [];
-  public popular_tv: SmallSlide[][] = [];
-  public toprated_tv: SmallSlide[][] = [];
-  public trending_tv: SmallSlide[][] = [];
+  public continue_watch: SmallSlide[] = [];
+  public popular_movies: SmallSlide[] = [];
+  public toprated_movies: SmallSlide[] = [];
+  public trending_movies: SmallSlide[] = [];
+  public popular_tv: SmallSlide[] = [];
+  public toprated_tv: SmallSlide[] = [];
+  public trending_tv: SmallSlide[] = [];
   public title1: string = 'Continue Watching';
   public title2: string = 'Popular Movies';
   public title3: string = 'Top Rated Movies';
@@ -45,45 +46,54 @@ export class HomepageComponent implements OnInit {
   public sum5: number = 0;
   public sum6: number = 0;
   public sum7: number = 0;
-  tempFormatted : any[] = [];
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;
   pauseOnHover = true;
   pauseOnFocus = true;
-  constructor(private slideService: SlideService) { }
+  showNavigationIndicators = true;
+  constructor(private slideService: SlideService, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
+    if(this.breakpointObserver.isMatched('(max-width: 576px)')){
+      this.showNavigationIndicators = false;
+    }else if(this.breakpointObserver.isMatched('(max-width: 768px)')){
+      this.showNavigationIndicators = true;
+    }else{
+      this.showNavigationIndicators = true;
+    }
+
+
     this.slideService.getNowPlaying().subscribe(res => {
       this.now_play = Object.values(res)[0];
     })
     var continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
-    this.continue_watch = this.format(continue_list);
+    this.continue_watch = continue_list;
     this.sum1 = continue_list.length;
 
     this.slideService.getPopularMovies().subscribe(res => {
       this.sum2 = Object.values(res)[0].length;
-      this.popular_movies = this.format(Object.values(res)[0]);
+      this.popular_movies = Object.values(res)[0];
     })
     this.slideService.getTopratedMovies().subscribe(res => {
       this.sum3 = Object.values(res)[0].length;
-      this.toprated_movies = this.format(Object.values(res)[0]);
+      this.toprated_movies = Object.values(res)[0];
     })
     this.slideService.getTrendingMovies().subscribe(res => {
       this.sum4 = Object.values(res)[0].length;
-      this.trending_movies = this.format(Object.values(res)[0]);
+      this.trending_movies = Object.values(res)[0];
     })
     this.slideService.getPopularTV().subscribe(res => {
       this.sum5 = Object.values(res)[0].length;
-      this.popular_tv = this.format(Object.values(res)[0]);
+      this.popular_tv = Object.values(res)[0];
     })
     this.slideService.getTopratedTV().subscribe(res => {
       this.sum6 = Object.values(res)[0].length;
-      this.toprated_tv = this.format(Object.values(res)[0]);
+      this.toprated_tv = Object.values(res)[0];
     })
     this.slideService.getTrendingTV().subscribe(res => {
       this.sum7 = Object.values(res)[0].length;
-      this.trending_tv = this.format(Object.values(res)[0]);
+      this.trending_tv = Object.values(res)[0];
     })
   }
 
@@ -104,23 +114,6 @@ export class HomepageComponent implements OnInit {
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
-  }
-
-  format(slides: SmallSlide[]){
-    this.tempFormatted = [];
-    var j = -1;
-
-    for (var i = 0; i < slides.length; i++) {
-        if (i % 6 == 0) {
-            j++;
-            this.tempFormatted[j] = [];
-            this.tempFormatted[j].push(slides[i]);
-        }
-        else {
-            this.tempFormatted[j].push(slides[i]);
-        }
-    }
-    return this.tempFormatted;
   }
 
 }

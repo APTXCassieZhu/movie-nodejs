@@ -1,7 +1,25 @@
-<h1 class="slide-title" *ngIf="slideSum != 0">{{componentTitle}}</h1>
-<ngb-carousel *ngIf="slideSum >= 6" [interval]="0">
-  <ng-template ngbSlide *ngFor="let group of slides" >
-    <div class="slide-image-wrapper">
+<div *ngIf="!mobile">
+  <h1 class="slide-title" *ngIf="slideSum != 0">{{componentTitle}}</h1>
+  <ngb-carousel *ngIf="slideSum >= 6" [interval]="0" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let group of formattedSlides" >
+      <div class="slide-image-wrapper">
+        <div class="slide-image-container" *ngFor="let image of group">
+          <a href="/watch/{{image['media_type']}}/{{image['id']}}">
+              <div class="slide-image">
+                  <img [src]="image['poster_path']">
+                  <div class="mask">
+                      <p class="poster-title">{{image['title']}}</p>
+                  </div>
+              </div>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+
+
+  <div *ngIf="slideSum > 0 && slideSum < 6">
+    <div class="slide-image-wrapper" *ngFor="let group of formattedSlides">
       <div class="slide-image-container" *ngFor="let image of group">
         <a href="/watch/{{image['media_type']}}/{{image['id']}}">
             <div class="slide-image">
@@ -13,21 +31,26 @@
         </a>
       </div>
     </div>
-  </ng-template>
-</ngb-carousel>
-
-
-<div *ngIf="slideSum > 0 && slideSum < 6">
-  <div class="slide-image-wrapper" *ngFor="let group of slides">
-    <div class="slide-image-container" *ngFor="let image of group">
-      <a href="/watch/{{image['media_type']}}/{{image['id']}}">
-          <div class="slide-image">
-              <img [src]="image['poster_path']">
-              <div class="mask">
-                  <p class="poster-title">{{image['title']}}</p>
-              </div>
-          </div>
-      </a>
-    </div>
   </div>
+</div>
+
+
+<div *ngIf="mobile">
+  <h1 class="slide-title-mobile" *ngIf="slideSum != 0">{{componentTitle}}</h1>
+  <ngb-carousel *ngIf="slideSum >= 6" [interval]="0" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let group of formattedSlides" >
+      <div class="slide-image-wrapper-mobile">
+        <div class="slide-image-container" *ngFor="let image of group">
+          <a href="/watch/{{image['media_type']}}/{{image['id']}}">
+              <div class="slide-image-mobile">
+                  <img [src]="image['poster_path']">
+                  <div class="mask">
+                      <p class="poster-title">{{image['title']}}</p>
+                  </div>
+              </div>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>

@@ -1,5 +1,5 @@
 <div class="carousel-container">
-  <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+  <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)" [showNavigationIndicators]="showNavigationIndicators">
     <ng-template ngbSlide *ngFor="let img_info of now_play; index as i">
       <a href="/watch/movie/{{img_info['id']}}" rel="nofollow noopener noreferrer">
         <div class="picsum-img-wrapper">
