@@ -1,0 +1,8 @@
+runtime: nodejs14 
+handlers:
+  - url: /(.*\.(js|css|svg|png)(|\.map))$
+    static_files: 571hw8-client/\1
+    upload: 571hw8-client/(.*)(|\.map)
+  - url: /.*
+    static_files: 571hw8-client/index.html
+    upload: 571hw8-client/.*

@@ -9,40 +9,40 @@ export class SlideService {
   constructor(private httpClient: HttpClient) { }
 
   getNowPlaying(){
-    let url = "http://localhost:8080/slide/now_playing";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/now_playing";
     return this.httpClient.get(url);
   }
   getPopularMovies(){
-    let url = "http://localhost:8080/slide/popular/movie";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/popular/movie";
     return this.httpClient.get(url);
   }
   getTopratedMovies(){
-    let url = "http://localhost:8080/slide/toprated/movie";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/toprated/movie";
     return this.httpClient.get(url);
   }
   getTrendingMovies(){
-    let url = "http://localhost:8080/slide/trending/movie";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/trending/movie";
     return this.httpClient.get(url);
   }
   getPopularTV(){
-    let url = "http://localhost:8080/slide/popular/tv";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/popular/tv";
     return this.httpClient.get(url);
   }
   getTopratedTV(){
-    let url = "http://localhost:8080/slide/toprated/tv";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/toprated/tv";
     return this.httpClient.get(url);
   }
   getTrendingTV(){
-    let url = "http://localhost:8080/slide/trending/tv";
+    let url = "https://ruiqi571.wl.r.appspot.com/slide/trending/tv";
     return this.httpClient.get(url);
   }
 
   getRecommend(id: string, media_type: string){
-    let url = "http://localhost:8080/"+media_type+"/"+id+"/recommend";
+    let url = "https://ruiqi571.wl.r.appspot.com/"+media_type+"/"+id+"/recommend";
     return this.httpClient.get(url);
   }
   getSimilar(id: string, media_type: string){
-    let url = "http://localhost:8080/"+media_type+"/"+id+"/similar";
+    let url = "https://ruiqi571.wl.r.appspot.com/"+media_type+"/"+id+"/similar";
     return this.httpClient.get(url);
   }
 }

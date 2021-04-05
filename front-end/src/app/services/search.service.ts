@@ -9,7 +9,7 @@ export class SearchService {
   constructor(private httpClient: HttpClient) { }
 
   get7Matches(query: string){
-    let url = "http://localhost:8080/search/"+query;
+    let url = "https://ruiqi571.wl.r.appspot.com/search/"+query;
     return this.httpClient.get(url);
   }
 }

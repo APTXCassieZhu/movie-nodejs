@@ -12,27 +12,27 @@ export class DetailsService {
 
   constructor(private httpClient: HttpClient) { }
   getDetails(id: string, media_type: string){
-    let url = "http://localhost:8080/"+media_type+"/"+id;
+    let url = "https://ruiqi571.wl.r.appspot.com/"+media_type+"/"+id;
     return this.httpClient.get<MediaDetail>(url);
   }
   getVideo(id: string, media_type: string){
-    let url = "http://localhost:8080/"+media_type+"/video/"+id;
+    let url = "https://ruiqi571.wl.r.appspot.com/"+media_type+"/video/"+id;
     return this.httpClient.get<Video>(url);
   }
   getCast(id: string, media_type: string){
-    let url = "http://localhost:8080/cast/"+media_type+"/"+id;
+    let url = "https://ruiqi571.wl.r.appspot.com/cast/"+media_type+"/"+id;
     return this.httpClient.get(url);
   }
   getCastDetail(id: number){
-    let url = "http://localhost:8080/cast/"+id;
+    let url = "https://ruiqi571.wl.r.appspot.com/cast/"+id;
     return this.httpClient.get<CastDetail>(url);
   }
   getCastShare(id: number){
-    let url = "http://localhost:8080/cast/"+id+"/ex/share";
+    let url = "https://ruiqi571.wl.r.appspot.com/cast/"+id+"/ex/share";
     return this.httpClient.get<CastExternal>(url);
   }
   getReview(id: string, media_type: string){
-    let url = "http://localhost:8080/"+media_type+"/"+id+"/reviews";
+    let url = "https://ruiqi571.wl.r.appspot.com/"+media_type+"/"+id+"/reviews";
     return this.httpClient.get<Review[]>(url);
   }
   
