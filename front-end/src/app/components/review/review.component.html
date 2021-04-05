@@ -2,14 +2,18 @@
     <h1>Reviews<span>{{reviewSum}}</span></h1>
     <div class="card review-card" *ngFor="let review of reviewList">
         <div class="card-body">
-            <div class="review-content-wrapper">
-                <div class="img-container">
+            <div class="review-content-wrapper row">
+                <div class="img-container col-sm-1">
                     <img src="{{review.author_details.avatar_path}}">
                 </div>
-                <div class="review-container">
-                    <div class="card-title review-title">
+                <div class="review-container col-sm-9">
+                    <div class="card-title review-title" *ngIf="!mobile">
                         <h5>A review created by {{review.author}}</h5>
                         <div class="review-rate-box">&#9733;{{review.author_details.rating || 0}}</div>
+                    </div>
+                    <div class="card-title review-title-mobile" *ngIf="mobile">
+                        <h5>A review created by {{review.author}}</h5>
+                        <div class="review-rate-box-mobile">&#9733;{{review.author_details.rating || 0}}</div>
                     </div>
                     <p class="card-text review-time">Written by {{review.author}} on {{review.created_at}}</p>
                     <div class="review-content"><p>{{review.content}}</p></div>

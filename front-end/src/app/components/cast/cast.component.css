@@ -52,18 +52,14 @@
     height: fit-content;
 }
 .modal-top-container{
-    display: flex;
-    flex-direction: row;
     margin-bottom: 2rem;
 }
-.modal-top-container img{
-    width: 30%;
-}
+
 .cast-info-list{
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-left: 2.5rem
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .cast-info-list p, .modal-body p{

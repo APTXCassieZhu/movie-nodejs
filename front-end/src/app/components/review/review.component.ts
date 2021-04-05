@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DetailsService } from "../../services/details.service"
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 export interface Review{
   author: any,
@@ -25,17 +26,18 @@ export class ReviewComponent implements OnInit {
   @Input() mediaType: any;
   public reviewList: Review[] = [];
   public reviewSum: number = 0;
-  constructor(private detailsService: DetailsService) { }
+  mobile = false;
+  constructor(private detailsService: DetailsService, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
-  //   this.loadPage();
-  // }
-  // ngOnChanges(): void {
-  //   this.loadPage();
-  //   console.log('review reload');
-  // }
+    // mobile
+    if(this.breakpointObserver.isMatched('(max-width: 576px)')){
+      this.mobile = true;
+    }else{
+      this.mobile = false;
+    }
 
-  // loadPage(): void{
+
     this.detailsService.getReview(this.mediaId, this.mediaType).subscribe(res => {
       var len = res.length;
       if(len > 10){

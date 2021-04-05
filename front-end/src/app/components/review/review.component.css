@@ -38,13 +38,14 @@
 .review-card{
     margin-bottom: 1rem;
 }
-.review-title{
+.review-title, .review-title-mobile{
     color: black;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
-.review-title h5{
+.review-title h5, .review-title-mobile h5{
     margin: 0;
     font-weight: bold;
 }
@@ -52,7 +53,6 @@
 .review-time{
     color: #9C9694;
     font-size: 0.85rem;
-    margin-top: 2rem;
 }
 
 .review-content{
@@ -65,7 +65,7 @@
     font-size: 0.9rem;
 }
 
-.review-rate-box{
+.review-rate-box, .review-rate-box-mobile{
     border-radius: 1rem;
     background-color: black;
     color: white;
@@ -76,4 +76,13 @@
     justify-content: center;
     align-items: center;
     margin-left: 1.5rem;
+}
+
+/* mobile */
+.review-title-mobile{
+    margin-top: 1rem;
+}
+.review-rate-box-mobile{
+    margin-left: 0;
+    margin-top: 0.5rem;
 }

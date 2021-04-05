@@ -40,7 +40,7 @@
   <ngb-carousel *ngIf="slideSum >= 1" [interval]="0" [showNavigationIndicators]="showNavigationIndicators">
     <ng-template ngbSlide *ngFor="let group of formattedSlides" >
       <div class="slide-image-wrapper-mobile">
-        <div class="slide-image-container" *ngFor="let image of group">
+        <div class="slide-image-container-mobile" *ngFor="let image of group">
           <a href="/watch/{{image['media_type']}}/{{image['id']}}">
               <div class="slide-image-mobile">
                   <img [src]="image['poster_path']">
