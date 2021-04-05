@@ -11,25 +11,31 @@ router.get('/:query', function(req, res){
     axios.get(url).then(data => {
         // fetch top 7 matching media
         var result = '{"resultList":['
-        for(var i = 0; i < 7; i++){
-            result += '{'
+        var len = data.data.results.length;
+        var j = 0;
+        for(var i = 0; i < len; i++){
+            if(data.data.results[i].media_type == 'tv' || data.data.results[i].media_type == 'movie'){
+                if(j != 0){
+                    result += ',';
+                }
+                j++;
+                result += '{'
                 + '"id":' + data.data.results[i].id + ','
                 + '"media_type":"' + data.data.results[i].media_type + '",';
-            if(data.data.results[i].name != null){
-                result += '"name":"' + data.data.results[i].name + '",';
-            }else{
-                var name = data.data.results[i].title != null ? data.data.results[i].title : data.data.results[i].original_title;
-                result += '"name":"' + name + '",';
-            }
-            if(data.data.results[i].backdrop_path){
-                result += '"backdrop_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].backdrop_path + '"';
-            }else{
-                result += '"backdrop_path":"https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/movie-placeholder.jpg"';
-            }
-            if(i != 6){
-                result += '},';
-            }else{
-                result += '}';
+                if(data.data.results[i].name != null){
+                    result += '"name":"' + data.data.results[i].name + '",';
+                }else{
+                    var name = data.data.results[i].title != null ? data.data.results[i].title : data.data.results[i].original_title;
+                    result += '"name":"' + name + '",';
+                }
+                if(data.data.results[i].backdrop_path){
+                    result += '"backdrop_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].backdrop_path + '"}';
+                }else{
+                    result += '"backdrop_path":"https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/movie-placeholder.jpg"}';
+                }
+                if(j == 7){
+                    break;
+                }
             }
         }        
         result += ']}';
