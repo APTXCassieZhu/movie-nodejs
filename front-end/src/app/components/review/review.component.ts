@@ -66,7 +66,6 @@ export class ReviewComponent implements OnInit {
           hour -= 12;
         }
         this.reviewList[i].created_at = month+' '+day+', '+year+', '+hour+this.reviewList[i].created_at.substring(13, 19)+' '+mm;
-        console.log(this.reviewList);
       }
     })
   }

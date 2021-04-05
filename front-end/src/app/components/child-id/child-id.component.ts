@@ -94,6 +94,10 @@ export class ChildIdComponent implements OnInit {
     // data processing
     this.id = this.route.snapshot.paramMap.get('id');
     this.media_type = this.route.snapshot.paramMap.get('media_type');
+    if(this.media_type == 'tv'){
+      this.title1 = 'Recommended TV shows';
+      this.title2 = 'Similar TV shows';
+    }
 
     this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
       this.video = res;
@@ -112,6 +116,7 @@ export class ChildIdComponent implements OnInit {
         this.duration += minutes + 'mins';
       }
     
+      // local storage
       this.continue_list = JSON.parse(window.localStorage.getItem('continue_list') || "[]");
      
       this.cur_smallSlide = {id: this.id, title: this.cur_media.title, poster_path: this.cur_media.poster_path, media_type: this.media_type};
@@ -126,7 +131,7 @@ export class ChildIdComponent implements OnInit {
         this.continue_list.unshift(this.cur_smallSlide);
         // greater than 24, then start to drop
         if(this.continue_list.length > 24){
-          this.continue_list.slice(24);
+          this.continue_list.splice(24);
         }
       }
       window.localStorage.setItem('continue_list', JSON.stringify(this.continue_list));
@@ -178,7 +183,7 @@ export class ChildIdComponent implements OnInit {
       this.watch_list.unshift(this.cur_smallSlide);
       // greater than 24, then start to drop
       if(this.watch_list.length > 24){
-        this.watch_list.slice(24);
+        this.watch_list.splice(24);
       }
     }
     window.localStorage.setItem('watch_list', JSON.stringify(this.watch_list));

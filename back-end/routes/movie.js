@@ -72,9 +72,9 @@ router.get('/:id', function(req, res){
         len = data.data.spoken_languages.length;
         for(var i = 0; i < len; i++){
             if(i == len - 1){
-                result += '"' + data.data.spoken_languages[i].name + '"';
+                result += '"' + data.data.spoken_languages[i].english_name + '"';
             }else{
-                result += '"' + data.data.spoken_languages[i].name + ',",';
+                result += '"' + data.data.spoken_languages[i].english_name + ',",';
             }
         }
         result += '],';
