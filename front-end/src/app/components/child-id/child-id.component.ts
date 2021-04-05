@@ -12,6 +12,8 @@ import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { SmallSlide } from '../homepage/homepage.component';
 import { Video } from '../youtube/youtube.component';
 
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+
 export interface MediaDetail{
   "title": string,
   "release_date": string,
@@ -69,14 +71,27 @@ export class ChildIdComponent implements OnInit {
   public sum2: number = 0;
   public recommend_list: SmallSlide[] = [];
   public similar_list: SmallSlide[] = [];
+
+  mobile = false;
+  videoDesContainerClass = 'video-des-container col-sm-4';
   constructor(private route: ActivatedRoute, 
     private detailsService: DetailsService, 
-    private cd: ChangeDetectorRef,
+    private breakpointObserver: BreakpointObserver,
     private slideService: SlideService) { }
   
   @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert = {} as NgbAlert; 
   
   ngOnInit(): void {
+    // mobile
+    if(this.breakpointObserver.isMatched('(max-width: 576px)')){
+      this.mobile = true;
+      this.videoDesContainerClass = 'video-des-container-mobile col-sm-4';
+    }else{
+      this.mobile = false;
+      this.videoDesContainerClass = 'video-des-container col-sm-4'
+    }
+
+    // data processing
     this.id = this.route.snapshot.paramMap.get('id');
     this.media_type = this.route.snapshot.paramMap.get('media_type');
 

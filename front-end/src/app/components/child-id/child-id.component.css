@@ -1,15 +1,12 @@
 .detail-wrapper{
     width: 100%;
     max-width: 1350px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: center; 
     margin: auto;
     margin-top: 30px;
 }
 
 .video-wrapper{
-    width: 60%;
     overflow: hidden;
 }
 
@@ -30,12 +27,16 @@
     height: 100%;
 }
 
-.video-des-container{
-    width: 30%;
+.video-des-container, .video-des-container-mobile{
     display: flex;
     flex-direction: column;
     color: white;
-    margin-left: 3%;
+    padding-left: 2.5rem;
+}
+
+.video-des-container-mobile{
+    padding-left: 0.8rem;
+    margin-top: 2rem;
 }
 
 .tagline-style{
@@ -102,6 +103,10 @@ fa-icon{
     cursor: pointer;
 }
 
+::ng-deep .carousel{
+    margin: auto;
+    outline: none;
+}
 
 ::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next{
     width: 5%;

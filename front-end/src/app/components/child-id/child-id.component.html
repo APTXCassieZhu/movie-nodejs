@@ -1,13 +1,19 @@
-<div class="detail-wrapper">
-    <div class="video-wrapper">
+<div class="detail-wrapper row">
+    <div class="video-wrapper col-sm-8">
         <div class="video-container">
             <app-youtube [videoId]="video.key"></app-youtube>
         </div>
     </div>
-    <div class="video-des-container">
+    <div [ngClass]="videoDesContainerClass">
         <h1>{{cur_media.title}}</h1>
         <div class="tagline-style">{{cur_media.tagline}}</div>
-        <div class="des-number-style">{{cur_media.release_date}} | &#9733; {{cur_media.vote_average}} | {{duration}}</div>
+        <div class="des-number-style">
+            <span *ngIf="cur_media.release_date">{{cur_media.release_date}}</span>
+            <span *ngIf="cur_media.release_date && cur_media.vote_average"> | </span>
+            <span *ngIf="cur_media.vote_average">&#9733; {{cur_media.vote_average}} </span> 
+            <span *ngIf="duration != '' && (cur_media.release_date || cur_media.vote_average)"> | </span>
+            <span *ngIf="duration != ''">{{duration}}</span>
+        </div>
         <div class="des-list" *ngIf="cur_media.genres && cur_media.genres.length != 0">
             Genres : 
             <span *ngFor="let genre of cur_media.genres">
