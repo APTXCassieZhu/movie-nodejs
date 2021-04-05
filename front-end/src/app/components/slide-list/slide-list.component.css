@@ -31,15 +31,15 @@
     height: 100%;
 }
 
-.mask {
+.mask, .mask-mobile{
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: -0.5%;
     right: 0;
     background-image: linear-gradient(to bottom, rgba(7, 7, 7, 0.1),rgba(7, 7, 7, 0.1), rgba(7, 7, 7, 0.1), black, black);
     overflow: hidden;
-    width: 100%;
+    width: 101%;
     height: 100%;
     opacity: 0;
     margin: auto;
@@ -84,10 +84,20 @@
 
 .slide-image-mobile{
     position: relative;
-    max-width: 300px; 
+    max-width: 250px; 
+    margin-top: 1rem;
 }
 
 .slide-image-mobile img{
     width: 100%;
     height: 100%;
+}
+
+.mask-mobile{
+    opacity: 1;
+    height: 101%;
+}
+
+.slide-image-mobile:hover img, .slide-image-mobile:hover .mask-mobile{
+    transform: scale(1.1);
 }

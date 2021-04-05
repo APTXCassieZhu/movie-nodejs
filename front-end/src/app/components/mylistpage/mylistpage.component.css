@@ -48,11 +48,11 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: -0.5%;
     right: 0;
     background-image: linear-gradient(to bottom, rgba(7, 7, 7, 0.1),rgba(7, 7, 7, 0.1), rgba(7, 7, 7, 0.1), black, black);
     overflow: hidden;
-    width: 100%;
+    width: 101%;
     height: 101%;
     opacity: 0;
     margin: auto;
@@ -107,8 +107,6 @@
 
 .mask-mobile{
     opacity: 1;
-    left: -0.5%;
-    width: 101%;
 }
 .slide-image-mobile:hover img, .slide-image-mobile:hover .mask-mobile{
     transform: scale(1.1);

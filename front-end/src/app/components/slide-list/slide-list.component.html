@@ -37,14 +37,14 @@
 
 <div *ngIf="mobile">
   <h1 class="slide-title-mobile" *ngIf="slideSum != 0">{{componentTitle}}</h1>
-  <ngb-carousel *ngIf="slideSum >= 6" [interval]="0" [showNavigationIndicators]="showNavigationIndicators">
+  <ngb-carousel *ngIf="slideSum >= 1" [interval]="0" [showNavigationIndicators]="showNavigationIndicators">
     <ng-template ngbSlide *ngFor="let group of formattedSlides" >
       <div class="slide-image-wrapper-mobile">
         <div class="slide-image-container" *ngFor="let image of group">
           <a href="/watch/{{image['media_type']}}/{{image['id']}}">
               <div class="slide-image-mobile">
                   <img [src]="image['poster_path']">
-                  <div class="mask">
+                  <div class="mask-mobile">
                       <p class="poster-title">{{image['title']}}</p>
                   </div>
               </div>
