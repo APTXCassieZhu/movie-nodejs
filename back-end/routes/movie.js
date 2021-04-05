@@ -11,12 +11,6 @@ router.get('/video/:id', function(req, res){
     axios.get(url).then(data => {
         var result = '{'
         var len = data.data.results.length;
-        if(len == 0){
-            result += '"site": "Youtube",'
-                + '"type": "fake",'
-                + '"name": "undefined",' 
-                + '"key": "tzkWB85ULJY"}';
-        }
         var findTrailer = 0;
         for(var i = 0; i < len; i++){
             if(data.data.results[i].type == 'Trailer'){
@@ -38,6 +32,12 @@ router.get('/video/:id', function(req, res){
                     break;
                 }
             }  
+        }
+        if(result == '{'){
+            result += '"site": "Youtube",'
+                + '"type": "fake",'
+                + '"name": "undefined",' 
+                + '"key": "tzkWB85ULJY"}';
         }
         res.json(JSON.parse(result));
     }).catch(err => {
