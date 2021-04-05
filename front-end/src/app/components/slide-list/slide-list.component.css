@@ -18,12 +18,11 @@
 .slide-image-container{
     margin-left: 1%;
     margin-right: 1%;
+    width: 14.5%;
 }
 
 .slide-image{
     position: relative;
-    max-width: 182.25px;
-    max-height: 270px; 
 }
 
 .slide-image img{

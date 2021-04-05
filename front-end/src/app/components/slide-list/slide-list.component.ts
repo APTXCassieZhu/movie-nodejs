@@ -34,10 +34,6 @@ export class SlideListComponent implements OnInit {
       this.formattedSlides = this.format(this.slides);
       this.showNavigationIndicators = false;
       this.mobile = true;
-    }else if(this.breakpointObserver.isMatched('(max-width: 768px)')){
-      this.formattedSlides = this.format4(this.slides);
-      this.showNavigationIndicators = true;
-      this.mobile = false;
     }else{
       this.formattedSlides = this.format6(this.slides);
       this.showNavigationIndicators = true;
@@ -51,22 +47,6 @@ export class SlideListComponent implements OnInit {
 
     for (var i = 0; i < slides.length; i++) {
         if (i % 6 == 0) {
-            j++;
-            this.tempFormatted[j] = [];
-            this.tempFormatted[j].push(slides[i]);
-        }
-        else {
-            this.tempFormatted[j].push(slides[i]);
-        }
-    }
-    return this.tempFormatted;
-  }
-  format4(slides: SmallSlide[]){
-    this.tempFormatted = [];
-    var j = -1;
-
-    for (var i = 0; i < slides.length; i++) {
-        if (i % 4 == 0) {
             j++;
             this.tempFormatted[j] = [];
             this.tempFormatted[j].push(slides[i]);
