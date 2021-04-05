@@ -99,13 +99,17 @@ export class ChildIdComponent implements OnInit {
       this.title2 = 'Similar TV shows';
     }
 
-    this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
-      this.video = res;
-    })
-
     this.detailsService.getDetails(this.id, this.media_type).subscribe(res => {
       this.cur_media = res;
       this.cur_media.release_date = this.cur_media.release_date.substring(0,4);
+
+      this.detailsService.getVideo(this.id, this.media_type).subscribe(res => {
+        this.video = res;
+        // for share
+        this.twitterUrl = 'https://twitter.com/intent/tweet?text=Watch%20'+this.cur_media.title
+        +' https://www.youtube.com/watch?v='+ this.video.key +'       &hashtags=USC&hashtags=CSCI571&hashtags=FightOn';
+        this.facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=https://www.youtube.com/watch?v='+ this.video.key;
+      })
       
       var hours = Math.floor(this.cur_media.runtime[0] / 60);
       var minutes = this.cur_media.runtime[0] % 60;
@@ -135,13 +139,8 @@ export class ChildIdComponent implements OnInit {
         }
       }
       window.localStorage.setItem('continue_list', JSON.stringify(this.continue_list));
-
-      // for share
-      this.twitterUrl = 'https://twitter.com/intent/tweet?text=Watch%20'+this.cur_media.title
-        +' https://www.youtube.com/watch?v='+ this.video.key +'       &hashtags=USC&hashtags=CSCI571&hashtags=FightOn';
-      this.facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=https://www.youtube.com/watch?v='+ this.video.key;
     })
-
+      
     this._success.subscribe(message => this.showAlert = message);
     this._success.pipe(debounceTime(5000)).subscribe(() => {
       if(this.selfClosingAlert){
