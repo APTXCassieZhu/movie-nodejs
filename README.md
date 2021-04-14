@@ -6,7 +6,7 @@ responsive
 youtube web version: https://www.youtube.com/watch?v=HjlNHsMEXAg 
 phone version: https://www.youtube.com/watch?v=ISLgbDdQ17U 
 
-## 1. Objectives
+# 1. Objectives
 
 • Get familiar with AJAX and JSON technologies
 • Use a combination of HTML5, Bootstrap and Angular on client side
@@ -14,7 +14,7 @@ phone version: https://www.youtube.com/watch?v=ISLgbDdQ17U
 • Get familiar with Bootstrap to enhance the user experience using responsive design
 • Get hands-on experience of Cloud services hosting NodeJS/Express
 • Learn to use popular APIs such as TMDB Api
-## 2. Background
+# 2. Background
 ## 2.1 AJAX and JSON
 
 AJAX (Asynchronous JavaScript + XML) incorporates several technologies
