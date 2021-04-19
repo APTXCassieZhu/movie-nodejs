@@ -34,21 +34,27 @@ router.get('/now_playing', function(req, res){
 })
 
 //top rated movies
-router.get('/toprated/movie', async function(req, res){
+router.get('/toprated/movie', function(req, res){
     var api_key = config.API_KEY;  
     let url = "https://api.themoviedb.org/3/movie/top_rated?api_key="+api_key+"&language=en-US&page=1";
-    const data = await axios.get(url);
-    var result = await getMovieList(data);    
-    res.json(JSON.parse(result));
+    axios.get(url).then(data => {
+        var result = getMovieList(data);
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
 })
 
 //popular movies
-router.get('/popular/movie', async function(req, res){
+router.get('/popular/movie', function(req, res){
     var api_key = config.API_KEY;    
     let url = "https://api.themoviedb.org/3/movie/popular?api_key="+api_key+"&language=en-US&page=1";
-    const data = await axios.get(url);
-    var result = await getMovieList(data);
-    res.json(JSON.parse(result));
+    axios.get(url).then(data => {
+        var result = getMovieList(data);
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
 })
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,31 +94,119 @@ router.get('/trending/tv', function(req, res){
 })
 
 //popular tv
-router.get('/popular/tv', async function(req, res){
+router.get('/popular/tv', function(req, res){
     var api_key = config.API_KEY;    
     let url = "https://api.themoviedb.org/3/tv/popular?api_key="+api_key+"&language=en-US&page=1";
-    const data = await axios.get(url)
-    var result = await getTVList(data);
-    res.json(JSON.parse(result));
+    axios.get(url).then(data => {
+        var result = getTVList(data);
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
 })
 
 //top rated tv
-router.get('/toprated/tv', async function(req, res){
+router.get('/toprated/tv', function(req, res){
     var api_key = config.API_KEY;    
     let url = "https://api.themoviedb.org/3/tv/top_rated?api_key="+api_key+"&language=en-US&page=1";
-    const data = await axios.get(url)
-    var result = await getTVList(data);
-    res.json(JSON.parse(result));
+    axios.get(url).then(data => {
+        var result = getTVList(data);
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
 })
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+// for both
+router.get('/video/:type/:id', function(req, res){
+    var type = req.params.type; 
+    var id = req.params.id
+    var api_key = config.API_KEY; 
+    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/videos?api_key="+api_key+"&language=en-US&page=1";
+    var result = '';
+    axios.get(url).then(data => {        
+        result = '{'
+        var len = data.data.results.length;
+        var findTrailer = 0;
+        for(var i = 0; i < len; i++){
+            if(data.data.results[i].type == 'Trailer'){
+                findTrailer = 1;
+                result += '"site": "' + data.data.results[i].site + '",'
+                    + '"type": "' + data.data.results[i].type + '",'
+                    + '"name": "' + data.data.results[i].name + '",'
+                    + '"key": "' + data.data.results[i].key + '"}';
+                break;
+            }
+        }  
+        if(findTrailer == 0){
+            for(var i = 0; i < len; i++){
+                if(data.data.results[i].type == 'Teaser'){
+                    result += '"site": "' + data.data.results[i].site + '",'
+                        + '"type": "' + data.data.results[i].type + '",'
+                        + '"name": "' + data.data.results[i].name + '",'
+                        + '"key": "' + data.data.results[i].key + '"}';
+                    break;
+                }
+            }  
+        }
+        if(result == '{'){
+            result += '"site": "Youtube",'
+                + '"type": "fake",'
+                + '"name": "undefined",' 
+                + '"key": "tzkWB85ULJY"}';
+        }    
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
+router.get('/detail/:type/:id', function(req, res){
+    var type = req.params.type; 
+    var id = req.params.id
+    var api_key = config.API_KEY;    
+    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {
+        var result = '{'  
+        if(type == 'movie'){
+            result += '"title":"' + data.data.title + '",'
+            + '"release_date": "' + data.data.release_date.slice(0,4) + '",';
+        }else{
+            result += '"title":"' + data.data.name + '",'
+            + '"release_date": "' + data.data.first_air_date.slice(0,4) + '",';
+        }
+        
+        result += '"overview": "' + data.data.overview + '",'
+            + '"vote_average": "' + data.data.vote_average + '",'
+            + '"genres": "';
+        var len = data.data.genres.length;
+        for(var i = 0; i < len; i++){
+            if(i == len - 1){
+                result += data.data.genres[i].name;
+            }else{
+                result += data.data.genres[i].name + ', ';
+            }
+        }
+        result += '",'
+        if(data.data.poster_path){
+            result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.poster_path + '"}';
+        }else{
+            result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
+        }        
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
 
 /// helper function
-async function getMovieList(data){
+function getMovieList(data){
     var result = '{"results":['  
     var len = data.data.results.length;
     len = Math.min(len, 20);
@@ -122,7 +216,6 @@ async function getMovieList(data){
             + '"title":"' + data.data.results[i].title + '",'
             + '"date":"' + data.data.results[i].release_date.slice(0, 4) + '",'
             + '"media_type":"movie",'
-        result += '"video":'+ await getVideoByID(data.data.results[i].id, 'movie')+','
         if(data.data.results[i].poster_path){
             result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
         }else{
@@ -138,7 +231,7 @@ async function getMovieList(data){
     return result;
 }
 
-async function getTVList(data){
+function getTVList(data){
     var result = '{"results":['  
     var len = data.data.results.length;
     len = Math.min(len, 20);
@@ -148,7 +241,6 @@ async function getTVList(data){
             + '"title":"' + data.data.results[i].name + '",'
             + '"date":"' + data.data.results[i].first_air_date.slice(0, 4) + '",'
             + '"media_type":"tv",'
-        result += '"video":'+ await getVideoByID(data.data.results[i].id, 'tv')+','
         if(data.data.results[i].poster_path){
             result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"';
         }else{
@@ -162,44 +254,6 @@ async function getTVList(data){
     }        
     result += ']}';      
     return result;
-}
-
-async function getVideoByID(id, type){    
-    var api_key = config.API_KEY; 
-    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/videos?api_key="+api_key+"&language=en-US&page=1";
-    var result = '';
-    const data = await axios.get(url);
-    result = '{'
-    var len = data.data.results.length;
-    var findTrailer = 0;
-    for(var i = 0; i < len; i++){
-        if(data.data.results[i].type == 'Trailer'){
-            findTrailer = 1;
-            result += '"site": "' + data.data.results[i].site + '",'
-                + '"type": "' + data.data.results[i].type + '",'
-                + '"name": "' + data.data.results[i].name + '",'
-                + '"key": "' + data.data.results[i].key + '"}';
-            break;
-        }
-    }  
-    if(findTrailer == 0){
-        for(var i = 0; i < len; i++){
-            if(data.data.results[i].type == 'Teaser'){
-                result += '"site": "' + data.data.results[i].site + '",'
-                    + '"type": "' + data.data.results[i].type + '",'
-                    + '"name": "' + data.data.results[i].name + '",'
-                    + '"key": "' + data.data.results[i].key + '"}';
-                break;
-            }
-        }  
-    }
-    if(result == '{'){
-        result += '"site": "Youtube",'
-            + '"type": "fake",'
-            + '"name": "undefined",' 
-            + '"key": "tzkWB85ULJY"}';
-    }    
-    return result
 }
 
 module.exports = router;
