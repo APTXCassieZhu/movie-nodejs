@@ -181,7 +181,7 @@ router.get('/detail/:type/:id', function(req, res){
             result += '"title":"' + (data.data.name || "N/A") + '",'
             + '"release_date": "' + (data.data.first_air_date.slice(0,4) || "N/A") + '",';
         }
-        result+= '"vote_average": "' + (data.data.vote_average || 0) + '",'
+        result+= '"vote_average": ' + (data.data.vote_average || 0)/2 + ','
             + '"genres": "';
         var len = data.data.genres.length;
         if(len == 0){
@@ -246,7 +246,7 @@ router.get('/review/:type/:id', function(req, res){
     var type = req.params.type  
     let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/reviews?api_key="+api_key+"&language=en-US&page=1";
     axios.get(url).then(data => {        
-        var len = data.data.results.length;
+        var len = data.data.results.length;        
         for(var i = 0; i < len; i++){
             var year = data.data.results[i].created_at.slice(0, 4);
             var month = MonthMap[parseInt(data.data.results[i].created_at.slice(5, 7))];
@@ -255,7 +255,8 @@ router.get('/review/:type/:id', function(req, res){
             if(data.data.results[i].author == null){
                 data.data.results[i].author = "anynomous user";
             }
-        }  
+            data.data.results[i].author_details.rating = (data.data.results[i].author_details.rating || 0)/2
+        }          
         res.json(data.data.results);
     }).catch(err => {
         res.send(err);
@@ -290,6 +291,51 @@ router.get('/recommend/:type/:id', function(req, res){
         res.send(err);
     })
 })
+
+// multi search
+router.get('/search/:query', function(req, res){
+    var api_key = config.API_KEY;
+    var query = req.params.query;    
+    let url = "https://api.themoviedb.org/3/search/multi?api_key="+api_key+"&language=enUS&query="+query;
+    axios.get(url).then(data => {
+        var result = '{"resultList":['
+        var len = data.data.results.length;
+        var j = 0;
+        for(var i = 0; i < len; i++){
+            if(data.data.results[i].media_type == 'tv' || data.data.results[i].media_type == 'movie'){
+                if(j != 0){
+                    result += ',';
+                }
+                j++;
+                result += '{'
+                + '"id":' + data.data.results[i].id + ','
+                + '"media_type":"' + data.data.results[i].media_type + '",'
+                + '"vote_average":' + (data.data.results[i].vote_average || 0)/2 + ',';
+                if(data.data.results[i].media_type == 'tv'){
+                    result += '"date":"'+ data.data.results[i].first_air_date.slice(0,4) + '",'
+                }else{
+                    result += '"date":"'+ data.data.results[i].release_date.slice(0,4) + '",'
+                }
+                if(data.data.results[i].name != null){
+                    result += '"title":"' + data.data.results[i].name + '",';
+                }else{
+                    var name = data.data.results[i].title != null ? data.data.results[i].title : data.data.results[i].original_title;
+                    result += '"title":"' + name + '",';
+                }
+                if(data.data.results[i].backdrop_path){
+                    result += '"backdrop_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].backdrop_path + '"}';
+                }else{
+                    result += '"backdrop_path":"https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/movie-placeholder.jpg"}';
+                }
+            }
+        }        
+        result += ']}';        
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
 
 /// helper function
 function getMovieList(data){
