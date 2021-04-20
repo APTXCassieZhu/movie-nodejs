@@ -205,6 +205,36 @@ router.get('/detail/:type/:id', function(req, res){
     })
 })
 
+// cast
+router.get('/cast/:type/:id', function(req, res){
+    var api_key = config.API_KEY;
+    var type = req.params.type;
+    var id = req.params.id;
+    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/credits?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {
+        var result = '{"castList":['
+        var len = data.data.cast.length;
+        len = Math.min(len, 10)
+        for(var i = 0; i < len; i++){
+            if(i != 0){
+                result += ',';
+            }
+            result += '{"id": "' + data.data.cast[i].id + '",'
+                + '"character": "' + data.data.cast[i].character + '",';
+
+            if(data.data.cast[i].profile_path){
+                result += '"profile_path": "https://image.tmdb.org/t/p/w500/' + data.data.cast[i].profile_path + '"}';
+            }else{
+                result += '"profile_path": "https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/person-placeholder.png"}';
+            }
+        }  
+        result += ']}';
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
 /// helper function
 function getMovieList(data){
     var result = '{"results":['  
