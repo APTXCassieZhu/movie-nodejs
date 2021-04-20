@@ -252,6 +252,9 @@ router.get('/review/:type/:id', function(req, res){
             var month = MonthMap[parseInt(data.data.results[i].created_at.slice(5, 7))];
             var day = data.data.results[i].created_at.slice(8, 10);
             data.data.results[i].created_at = month+' '+day+', '+year;
+            if(data.data.results[i].author == null){
+                data.data.results[i].author = "anynomous user";
+            }
         }  
         res.json(data.data.results);
     }).catch(err => {
