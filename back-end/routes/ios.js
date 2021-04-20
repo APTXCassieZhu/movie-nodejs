@@ -220,7 +220,7 @@ router.get('/cast/:type/:id', function(req, res){
                 result += ',';
             }
             result += '{"id": "' + data.data.cast[i].id + '",'
-                + '"character": "' + data.data.cast[i].character + '",';
+                + '"name": "' + data.data.cast[i].name + '",';
 
             if(data.data.cast[i].profile_path){
                 result += '"profile_path": "https://image.tmdb.org/t/p/w500/' + data.data.cast[i].profile_path + '"}';
