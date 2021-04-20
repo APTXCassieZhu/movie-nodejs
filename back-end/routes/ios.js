@@ -237,11 +237,19 @@ router.get('/cast/:type/:id', function(req, res){
 
 // review
 router.get('/review/:type/:id', function(req, res){
+    var MonthMap = ["0", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
     var api_key = config.API_KEY;
     var id = req.params.id;   
     var type = req.params.type  
     let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/reviews?api_key="+api_key+"&language=en-US&page=1";
     axios.get(url).then(data => {        
+        var len = data.data.results.length;
+        for(var i = 0; i < len; i++){
+            var year = data.data.results[i].created_at.slice(0, 4);
+            var month = MonthMap[parseInt(data.data.results[i].created_at.slice(5, 7))];
+            var day = data.data.results[i].created_at.slice(8, 10);
+            data.data.results[i].created_at = month+' '+day+', '+year;
+        }  
         res.json(data.data.results);
     }).catch(err => {
         res.send(err);
