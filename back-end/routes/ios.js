@@ -235,6 +235,48 @@ router.get('/cast/:type/:id', function(req, res){
     })
 })
 
+// review
+router.get('/review/:type/:id', function(req, res){
+    var api_key = config.API_KEY;
+    var id = req.params.id;   
+    var type = req.params.type  
+    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/reviews?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {        
+        res.json(data.data.results);
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
+// recommendation
+router.get('/recommend/:type/:id', function(req, res){
+    var api_key = config.API_KEY;
+    var id = req.params.id;   
+    var type = req.params.type  
+    let url = "https://api.themoviedb.org/3/"+type+"/"+id+"/recommendations?api_key="+api_key+"&language=en-US&page=1";
+    axios.get(url).then(data => {        
+        var len = data.data.results.length;
+        var result = '{"resultList":['
+        for(var i = 0; i < len; i++){
+            if(i != 0){
+                result += ',';
+            }
+            result += '{'
+                + '"id":' + data.data.results[i].id + ','
+                + '"media_type":"'+type+'",';
+            if(data.data.results[i].poster_path){
+                result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.results[i].poster_path + '"}';
+            }else{
+                result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
+            }
+        }        
+        result += ']}';        
+        res.json(JSON.parse(result));
+    }).catch(err => {
+        res.send(err);
+    })
+})
+
 /// helper function
 function getMovieList(data){
     var result = '{"results":['  
