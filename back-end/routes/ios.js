@@ -175,17 +175,18 @@ router.get('/detail/:type/:id', function(req, res){
     axios.get(url).then(data => {
         var result = '{'  
         if(type == 'movie'){
-            result += '"title":"' + data.data.title + '",'
-            + '"release_date": "' + data.data.release_date.slice(0,4) + '",';
+            result += '"title":"' + (data.data.title || "N/A") + '",'
+            + '"release_date": "' + (data.data.release_date.slice(0,4) || "N/A") + '",';
         }else{
-            result += '"title":"' + data.data.name + '",'
-            + '"release_date": "' + data.data.first_air_date.slice(0,4) + '",';
+            result += '"title":"' + (data.data.name || "N/A") + '",'
+            + '"release_date": "' + (data.data.first_air_date.slice(0,4) || "N/A") + '",';
         }
-        
-        result += '"overview": "' + data.data.overview + '",'
-            + '"vote_average": "' + data.data.vote_average + '",'
+        result+= '"vote_average": "' + (data.data.vote_average || 0) + '",'
             + '"genres": "';
         var len = data.data.genres.length;
+        if(len == 0){
+            result += "N/A";
+        }
         for(var i = 0; i < len; i++){
             if(i == len - 1){
                 result += data.data.genres[i].name;
@@ -199,7 +200,9 @@ router.get('/detail/:type/:id', function(req, res){
         }else{
             result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
         }        
-        res.json(JSON.parse(result));
+        var obj = JSON.parse(result)
+        obj["overview"] = data.data.overview
+        res.json(obj);
     }).catch(err => {
         res.send(err);
     })

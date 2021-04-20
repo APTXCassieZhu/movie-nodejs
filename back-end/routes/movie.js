@@ -55,7 +55,6 @@ router.get('/:id', function(req, res){
         result += '"title":"' + data.data.title + '",'
             + '"release_date": "' + data.data.release_date + '",'
             + '"runtime": [' + data.data.runtime + '],'
-            + '"overview": "' + data.data.overview + '",'
             + '"vote_average": "' + data.data.vote_average + '",'
             + '"tagline": "' + data.data.tagline + '",'
             + '"genres": [';
@@ -83,7 +82,9 @@ router.get('/:id', function(req, res){
         }else{
             result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
         }
-        res.json(JSON.parse(result));
+        var obj = JSON.parse(result)
+        obj["overview"] = data.data.overview
+        res.json(obj);
     }).catch(err => {
         res.send(err);
     })
