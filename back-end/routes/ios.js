@@ -332,7 +332,8 @@ router.get('/search/:query', function(req, res){
         result += ']}';        
         res.json(JSON.parse(result));
     }).catch(err => {
-        res.send(err);
+        var result = '{"resultList":[]}'
+        res.json(JSON.parse(result));
     })
 })
 
