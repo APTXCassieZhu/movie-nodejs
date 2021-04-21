@@ -175,11 +175,9 @@ router.get('/detail/:type/:id', function(req, res){
     axios.get(url).then(data => {
         var result = '{'  
         if(type == 'movie'){
-            result += '"title":"' + (data.data.title || "N/A") + '",'
-            + '"release_date": "' + (data.data.release_date.slice(0,4) || "N/A") + '",';
+            result += '"release_date": "' + (data.data.release_date.slice(0,4) || "N/A") + '",';
         }else{
-            result += '"title":"' + (data.data.name || "N/A") + '",'
-            + '"release_date": "' + (data.data.first_air_date.slice(0,4) || "N/A") + '",';
+            result += '"release_date": "' + (data.data.first_air_date.slice(0,4) || "N/A") + '",';
         }
         result+= '"vote_average": ' + (data.data.vote_average || 0)/2 + ','
             + '"genres": "';
@@ -199,9 +197,14 @@ router.get('/detail/:type/:id', function(req, res){
             result += '"poster_path":"https://image.tmdb.org/t/p/w500' + data.data.poster_path + '"}';
         }else{
             result += '"poster_path":"https://cinemaone.net/images/movie_placeholder.png"}';
-        }        
+        }       
         var obj = JSON.parse(result)
         obj["overview"] = data.data.overview
+        if(type == 'movie'){
+            obj["title"] = data.data.title || "N/A";    
+        }else{
+            obj["title"] = data.data.name || "N/A"; 
+        }    
         res.json(obj);
     }).catch(err => {
         res.send(err);
